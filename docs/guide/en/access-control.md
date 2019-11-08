@@ -1,10 +1,10 @@
 Access control
-==================
+==============
 
 Access control in Yii2 ROA is complicated to cover several cases
 of use.
 
-yii\filters\AccessControl
+yii\\filters\\AccessControl
 -------------------------
 
 [AccessControl](https://www.yiiframework.com/doc/api/2.0/yii-filters-accesscontrol)
@@ -23,14 +23,14 @@ CheckAccess
 There are several methods declared as 'checkAccess' covering different cases of
 use and ways to be declared.
 
-### tecnocen\roa\controllers\Resource::checkAccess()
+### roaresearch\\yii2\\roa\\controllers\\Resource::checkAccess()
 
 Extends from
-[yii\rest\ActiveController](https://www.yiiframework.com/doc/api/2.0/yii-rest-activecontroller)
+[yii\\rest\\ActiveController]
 It covers the use case of validating access for a specific controller.
 
 ```php
-class ShopResource extends \tecnocen\roa\Resource
+class ShopResource extends \roaresearch\yii2\roa\Resource
 {
     public function checkAccess($action, $model = null, $params = [])
     {
@@ -39,9 +39,9 @@ class ShopResource extends \tecnocen\roa\Resource
 }
 ```
 
-### tecnocen\roa\actions\Action::$checkAcccess
+### roaresearch\\yii2\\roa\\actions\\Action::$checkAcccess
 
-Extends from [yii\rest\Action] covers the use case of validating an action
+Extends from [yii\\rest\\Action] covers the use case of validating an action
 specifies
 
 The signature of the anonymous function changes by adding a `$ params` argument
@@ -49,15 +49,18 @@ contains the parameters sent through POST and GET.
 
 
 ```php
-class ShopResource extends \tecnocen\roa\Resource
+use roaresearch\yii2\roa\{Resource, Action};
+use yii\db\ActiveRecordInterface;
+
+class ShopResource extends Resource
 {
     public function actions()
     {
         $actions = parent::actions();
 
         $actions['create']['checkAccess'] = function (
-            \tecnocen\roa\Action $action,
-            \yii\db\ActiveRecordInterface $model = null,
+            Action $action,
+            ActiveRecordInterface $model = null,
             array $params = []
         ) {
             // ...
@@ -68,7 +71,7 @@ class ShopResource extends \tecnocen\roa\Resource
 }
 ```
 
-### tecnocen\roa\behaviors\Slug::$checkAccess
+### roaresearch\\yii2\\roa\\behaviors\\Slug::$checkAccess
 
 The Slug class is appended to the models to generate nested records links
 and also check that you have access to each section of the roa route.
@@ -78,13 +81,15 @@ the validation of `checkAccess` is executed in` aisle` of id 5, section of id 3
 and `shop` of id 1 in that order.
 
 ```php
+use roaresearch\yii2\roa\behaviors\Slug;
+
 class Shop extends \yii\db\ActiveRecord
 {
     public function behaviors()
     {
         return [
             'slug' => [
-                'class' => \tecnocen\roa\behaviors\Slug::class,
+                'class' => Slug::class,
                 'checkAccess' => function (array $params) {
                     // ...
                 },
@@ -95,3 +100,6 @@ class Shop extends \yii\db\ActiveRecord
 ```
 
 Where `$ params` are the parameters sent through POST and GET.
+
+[yii\\rest\\ActiveController]: https://www.yiiframework.com/doc/api/2.0/yii-rest-activecontroller
+[yii\\rest\\Action]: https://www.yiiframework.com/doc/api/2.0/yii-rest-action

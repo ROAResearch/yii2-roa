@@ -4,10 +4,10 @@ Control de Accesos
 El control de Accesos en Yii2 ROA es complicado para poder cubrir varios casos
 de uso.
 
-yii\filters\AccessControl
--------------------------
+`yii\filters\AccessControl`
+---------------------------
 
-[AccessControl](https://www.yiiframework.com/doc/api/2.0/yii-filters-accesscontrol)
+[AccessControl]
 es un ActionFilter de Yii2 que permite declarar reglas de acceso el cual se puede
 axexar en controladores o modulos.
 
@@ -23,14 +23,14 @@ CheckAccess
 Hay varios métodos declarados como 'checkAccess' cubriendo diferentes casos de
 uso y formas de ser declarados.
 
-### tecnocen\roa\controllers\Resource::checkAccess()
+### `roaresearch\yii2\roa\controllers\Resource::checkAccess()`
 
 Extiende de
-[yii\rest\ActiveController](https://www.yiiframework.com/doc/api/2.0/yii-rest-activecontroller)
+[ActiveController]
 Cubre el caso de uso de validar el acceso para un controlador específico.
 
 ```php
-class ShopResource extends \tecnocen\roa\Resource
+class ShopResource extends \roaresearch\yii2\roa\Resource
 {
     public function checkAccess($action, $model = null, $params = [])
     {
@@ -39,9 +39,9 @@ class ShopResource extends \tecnocen\roa\Resource
 }
 ```
 
-### tecnocen\roa\actions\Action::$checkAcccess
+### `roaresearch\yii2\roa\actions\Action::$checkAcccess`
 
-Extiende de [yii\rest\Action] cubre el caso de uso de validar una acción
+Extiende de [Action] cubre el caso de uso de validar una acción
 específica.
 
 La firma de la función anónima cambia agregando un argumento `$params` que
@@ -49,14 +49,14 @@ contiene los parámetros enviados mediante POST y GET.
 
 
 ```php
-class ShopResource extends \tecnocen\roa\Resource
+class ShopResource extends \roaresearch\yii2\roa\Resource
 {
     public function actions()
     {
         $actions = parent::actions();
 
         $actions['create']['checkAccess'] = function (
-            \tecnocen\roa\Action $action,
+            \roaresearch\yii2\roa\Action $action,
             \yii\db\ActiveRecordInterface $model = null,
             array $params = []
         ) {
@@ -68,7 +68,7 @@ class ShopResource extends \tecnocen\roa\Resource
 }
 ```
 
-### tecnocen\roa\behaviors\Slug::$checkAccess
+### `roaresearch\yii2\roa\behaviors\Slug::$checkAccess`
 
 La clase Slug se anexa a los modelos  para generar links anidados de registros
 y además revisar que se tenga acceso a cada sección de la ruta roa.
@@ -84,7 +84,7 @@ class Shop extends \yii\db\ActiveRecord
     {
         return [
             'slug' => [
-                'class' => \tecnocen\roa\behaviors\Slug::class,
+                'class' => \roaresearch\yii2\roa\behaviors\Slug::class,
                 'checkAccess' => function (array $params) {
                     // ...
                 },
@@ -95,3 +95,7 @@ class Shop extends \yii\db\ActiveRecord
 ```
 
 Donde `$params` son los parámetros enviados mediante POST y GET.
+
+[AccessControl]: https://www.yiiframework.com/doc/api/2.0/yii-filters-accesscontrol
+[ActiveController]: https://www.yiiframework.com/doc/api/2.0/yii-rest-activecontroller
+[Action]: https://www.yiiframework.com/doc/api/2.0/yii-rest-action

@@ -21,7 +21,7 @@ ROA que es necesario resaltar.
 
 La autenticación [OAuth2] es soportada con los filtros:
 
-- `tecnocen\oauth2server\filters\auth\CompositeAuth`
+- `roaresearch\yii2\oauth2server\filters\auth\CompositeAuth`
 - `yii\filters\auth\HttpBearerAuth`
 - `yii\filters\auth\QueryParamAuth`
 
@@ -45,7 +45,7 @@ public function behaviors()
 }
 ```
 
-> Por defecto está definido en `tecnocen\roa\modules\ApiContainer::behaviors()`.
+> Por defecto está definido en `roaresearch\yii2\roa\modules\ApiContainer::behaviors()`.
 > al extender este método hay que tener esto en cuenta.
 
 ### Negociación de Contenido
@@ -72,15 +72,15 @@ public function behaviors()
 }
 ```
 
-> Por defecto está definido en `tecnocen\roa\modules\ApiContainer::behaviors()`.
+> Por defecto está definido en `roaresearch\yii2\roa\modules\ApiContainer::behaviors()`.
 > al extender este método hay que tener esto en cuenta.
 
 ### Control de Acceso
 
 El control de acceso es mas complejo ya que no solo se soporta con el filtro
 `yii\filters\AccessControl` si no ademas con métodos
-`tecnocen\roa\controllers\Resource::checkAccess()`,
-`tecnocen\roa\behaviors\Slug::checkAccess()` y paradigmas como [RBAC].
+`roaresearch\yii2\roa\controllers\Resource::checkAccess()`,
+`roaresearch\yii2\roa\behaviors\Slug::checkAccess()` y paradigmas como [RBAC].
 
 [Articulo de Control de Acceso en ROA]
 
@@ -94,12 +94,11 @@ alcance que se necesite para cada funcionalidad.
 ### Anexar en Api Container
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 use yii\helpers\ArrayHelper;
 
-class Api extends \tecnocen\roa\modules\ApiContainer
+class Api extends \roaresearch\yii2\roa\modules\ApiContainer
 {
     public function behaviors()
     {
@@ -135,12 +134,10 @@ Anexar en Api Version
 Se puede anexar a una instancia de versión de api desde el contenedor:
 
 ```php
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-
-class Api extends \tecnocen\roa\modules\ApiContainer
+class Api extends \roaresearch\yii2\roa\modules\ApiContainer
 {
     public $versions = [
         'v1' => [
@@ -165,11 +162,10 @@ class Api extends \tecnocen\roa\modules\ApiContainer
 o en la declaración de la clase.
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public function behaviors()
     {
@@ -198,14 +194,11 @@ Por último se puede definir la autenticación por recurso de forma individual.
 
 Esto se puede hacer desde la versión a la que pertenece.
 
-
 ```php
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $resources = [
         'shop' => [
@@ -230,11 +223,10 @@ class V1 extends \tecnocen\roa\modules\ApiVersion
 o en la declaración de la clase.
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-class ShopResource extends \tecnocen\roa\controllers\Resource
+class ShopResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public function behaviors()
     {

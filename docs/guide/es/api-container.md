@@ -6,7 +6,7 @@ El contenedor de versiones de api se configura como módulo de la aplicación.
 Dentro del contenedor se definen las versiones soportadas por el api.
 
 El módulo de contendedor de versiones debe extender la clase
-`tecnocen\roa\modules\ApiContainer`.
+`roaresearch\yii2\roa\modules\ApiContainer`.
 
 Ejemplo de Módulo Contenedor de Api
 -----------------------------------
@@ -20,7 +20,7 @@ Ejemplo de Módulo Contenedor de Api
 ```
 
 ```php
-class BackendApi extends \tecnocen\roa\modules\ApiContainer
+class BackendApi extends \roaresearch\yii2\roa\modules\ApiContainer
 {
 
    public $identityClass => models\User::class;

@@ -38,14 +38,12 @@ Las librerias vienen preconfiguradas pero es necesario introducir los accesos
 para la base de datos en el archivo `tests/_app/config/db.local.php`.
 
 ```php
-<?php
-
 return [
     'password' => 'root',
 ];
 ```
 
-Crear la base  de datos definida en el archivo tests/_app/config/db.php`
+Crear la base  de datos definida en el archivo `tests/_app/config/db.php`
 
 `create database yii2_workflow_test`
 

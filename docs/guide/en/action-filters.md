@@ -4,7 +4,7 @@ Action Filters
 The classes that extend [ActionFilter] define behaviors for
 run before and after an action is executed.
 
-Yii2 ActionFilter 
+Yii2 ActionFilter
 --------------------
 
 Most filters such as [Cors], [HostControl], [HttpCache],
@@ -12,7 +12,7 @@ Most filters such as [Cors], [HostControl], [HttpCache],
 use as detailed in the [Yii2 Guide].
 
 Functionality Implemented in ROA
-------------------------------------
+--------------------------------
 
 There are functionalities of third parties or that already have a default support in
 ROA that it is necessary to highlight.
@@ -21,7 +21,7 @@ ROA that it is necessary to highlight.
 
 Authentication [OAuth2] is supported with filters:
 
-- `tecnocen\oauth2server\filters\auth\CompositeAuth`
+- `roaresearch\yii2\oauth2server\filters\auth\CompositeAuth`
 - `yii\filters\auth\HttpBearerAuth`
 - `yii\filters\auth\QueryParamAuth`
 
@@ -45,7 +45,7 @@ public function behaviors()
 }
 ```
 
-> By default this is defined in `tecnocen \ roa \ modules \ ApiContainer :: behaviors ()`.
+> By default this is defined in `roaresearch\yii2\roa\modules\ApiContainer::behaviors()`.
 > When extending this method, this must be taken into account.
 
 ### Content Negotiation
@@ -72,15 +72,15 @@ public function behaviors()
 }
 ```
 
-> By default this is defined in `tecnocen \ roa \ modules \ ApiContainer :: behaviors ()`.
+> By default this is defined in `roaresearch\yii2\roa\modules\ApiContainer::behaviors()`.
 > When extending this method, this must be taken into account.
 
 ### Access control
 
 Access control is more complex since it is not only supported with the filter
 `yii\filters\AccessControl` if not also with methods
-`tecnocen\roa\controllers\Resource::checkAccess()`,
-`tecnocen\roa\behaviors\Slug::checkAccess()` and paradigms like [RBAC].
+`roaresearch\yii2\roa\controllers\Resource::checkAccess()`,
+`roaresearch\yii2\roa\behaviors\Slug::checkAccess()` and paradigms like [RBAC].
 
 [Access Control Article in ROA]
 
@@ -94,12 +94,12 @@ scope that is needed for each functionality.
 ### Append in Api Container
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\roa\modules\ApiContainer;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 use yii\helpers\ArrayHelper;
 
-class Api extends \tecnocen\roa\modules\ApiContainer
+class Api extends ApiContainer
 {
     public function behaviors()
     {
@@ -127,7 +127,7 @@ This causes all the versions registered in the container.
 
 > By default the method contains support for authentication and content negotiator
 > so these functions must be redefined when writing the
-> method or invoke `parent :: behaviors ()` as in the example
+> method or invoke `parent::behaviors()` as in the example
 
 Append in Api Version
 ---------------------
@@ -135,12 +135,11 @@ Append in Api Version
 It can be appended to an api version instance from the container:
 
 ```php
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\roa\modules\ApiContainer;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-
-class Api extends \tecnocen\roa\modules\ApiContainer
+class Api extends ApiContainer
 {
     public $versions = [
         'v1' => [
@@ -165,11 +164,11 @@ class Api extends \tecnocen\roa\modules\ApiContainer
 or in the class declaration.
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\roa\modules\ApiContainer;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends ApiVersion
 {
     public function behaviors()
     {
@@ -199,12 +198,11 @@ Finally you can define the authentication by resource individually.
 This can be done from the version to which it belongs.
 
 ```php
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\roa\modules\ApiContainer;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends ApiVersion
 {
     public $resources = [
         'shop' => [
@@ -229,11 +227,11 @@ class V1 extends \tecnocen\roa\modules\ApiVersion
 or in the class declaration.
 
 ```php
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\roa\controllers\Resource;
+use yii\filters\auth\{HttpBearerAuth, QueryParamAuth};
 
-class ShopResource extends \tecnocen\roa\controllers\Resource
+class ShopResource extends Resource
 {
     public function behaviors()
     {
@@ -256,7 +254,7 @@ class ShopResource extends \tecnocen\roa\controllers\Resource
 ```
 
 > If an ActionFilter is used with more than one of the described methods,
-> all will be executed at the same time so it is necessary to use `$ except` and` $ only`
+> all will be executed at the same time so it is necessary to use `$except` and `$only`
 > to avoid collisions.
 
 [ActionFilter]: https://www.yiiframework.com/doc/api/2.0/yii-base-actionfilter

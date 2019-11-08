@@ -7,8 +7,8 @@ tengan los permisos de acceso y que estos sigan el ciclo de vida de recursos.
 
 Para ello se emplean varias clases que permitan su manejo como recursos ROA.
 
-tecnocen\roa\FileRecord
------------------------
+`roaresearch\yii2\roa\FileRecord`
+---------------------------------
 
 Interfaz de PHP la cual facilita usar el método `yii\web\Response::sendFile()`
 para devolver un archivo como respuesta de una petición.
@@ -16,7 +16,7 @@ para devolver un archivo como respuesta de una petición.
 ```php
 namespace backend\api\v1\models;
 
-use tecnocen\roa\FileRecord;
+use roaresearch\yii2\roa\FileRecord;
 use yii\web\Linkable;
 
 /**
@@ -67,7 +67,7 @@ class Product extends \common\models\Product implements FileRecord, Linkable
 > Nota: Toda la lógica para almacenar el archivo y guardar el registro
   debe implementarse de forma independiente.
 
-tecnocen\roa\controllers\Resource
+roaresearch\yii2\roa\controllers\Resource
 ---------------------------------
 
 En la clase del Recurso, se debe configurar qué archivos cargar al modelo.
@@ -77,25 +77,25 @@ En la clase del Recurso, se debe configurar qué archivos cargar al modelo.
 
 use backend\api\v1\Product;
 
-class ProductResource extends \tecnocen\roa\controllers\Resource
+class ProductResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public $modelClass = Product::class;
 
     public $createFileAttributes = ['picture'];
 
     public $updateFileAttributes = ['picture'];
-     
+
 }
 ```
 
-### tecnocen\roa\actions\FileStream
+### `roaresearch\yii2\roa\actions\FileStream`
 
 La clase Resource reconocerá automaticamente `Product` como un registro de
 archivo y configurará esta acción por defecto, opcionalmente esto se puede
 modificar en el método `actions()`.
 
 ```php
-class ProductResource extends \tecnocen\roa\controllers\Resource
+class ProductResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public function actions()
     {
@@ -109,8 +109,8 @@ class ProductResource extends \tecnocen\roa\controllers\Resource
 }
 ```
 
-tecnocen\roa\urlRules\File
---------------------------
+`roaresearch\yii2\roa\urlRules\File`
+------------------------------------
 
 Finally all thats left is to tell the url manager that the resource can return
 files via the api version module.
@@ -118,10 +118,9 @@ files via the api version module.
 This rule also enables [POST] requests on update to use `multipart/form-data`
 
 ```php
+use roaresearch\yii2\roa\urlRules\File as FileUrlRule;
 
-use tecnocen\roa\urlRules\File as FileUrlRule;
-
-class Version extends \tecnocen\roa\modules\ApiVersion
+class Version extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $resources = [
         'product' => [

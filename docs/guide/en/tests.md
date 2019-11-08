@@ -4,22 +4,22 @@ Testing classes
 Help classes and interfaces are provided to facilitate writing tests of
 [Codeception Yii] focused on [Rest Tests].
 
-`tecnocen\roa\test\Tester`
---------------------------
+`roaresearch\yii2\roa\test\Tester`
+----------------------------------
 
 Interface that requests specific methods for ROA to `Codeception\Actor`. It's used
 when asking the class `ApiTester` to implement it.
 
-It also provides a trait `tecnocen\roa\test\TesterTrait` which implements
+It also provides a trait `roaresearch\yii2\roa\test\TesterTrait` which implements
 all the necessary methods.
 
 ```php
 
 use Codeception\Actor;
-use tecnocen\roa\test\Tester as RoaTester;
-use tecnocen\roa\test\TesterTrait as RoaTesterTrait;
-use tecnocen\roa\test\AbstractResourceCest;
-use tecnocen\roa\test\AbstractAccessTokenCest;
+use roaresearch\yii2\roa\test\{
+    Tester as RoaTester,
+    TesterTrait as RoaTesterTrait
+};
 
 class ApiTester extends Actor implements RoaTester
 {
@@ -28,14 +28,14 @@ class ApiTester extends Actor implements RoaTester
 }
 ```
 
-`tecnocen\roa\test\AbstractAccessTokenCest`
--------------------------------------------
+`roaresearch\yii2\roa\test\AbstractAccessTokenCest`
+---------------------------------------------------
 
 Abstract class that provides protected methods that facilitate creation tests
 of tokens.
 
 ```php
-class V1TokenCest extends \tecnocen\roa\test\AbstractAccessTokenCest
+class V1TokenCest extends \roaresearch\yii2\roa\test\AbstractAccessTokenCest
 {
     /**
      * @dataprovider tokenData
@@ -61,14 +61,14 @@ class V1TokenCest extends \tecnocen\roa\test\AbstractAccessTokenCest
 }
 ```
 
-`tecnocen\roa\test\AbstractResourceCest`
--------------------------------------------
+`roaresearch\yii2\roa\test\AbstractResourceCest`
+------------------------------------------------
 
 Abstract class that provides protected methods that facilitate testing of resources
 ROA and their respective verbs.
 
 ```php
-class UserCest extends \tecnocen\roa\test\AbstractResourceCest
+class UserCest extends \roaresearch\yii2\roa\test\AbstractResourceCest
 {
     /**
      * @dataprovider indexData

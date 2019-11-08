@@ -1,15 +1,14 @@
 Clase de Recurso ROA
 ====================
 
-La clase `tecncen\roa\controllers\Resource` implementa el comportamiento general
-de un recurso en ROA.
+La clase `roaresearch\yii2\roa\controllers\Resource` implementa el
+comportamiento general de un recurso en ROA.
 
 Para poder utilizar la clase se requiere primero dar de alta el recurso en
-`tecnocen\roa\modules\ApiVersion::$resources`, esta propiedad se detalla en la
-guia de [Api Version](api-version.md).
+`roaresearch\yii2\roa\modules\ApiVersion::$resources`, esta propiedad se
+detalla en la guía de [Api Version](api-version.md).
 
 Supongamos que se declara el siguiente recurso.
-
 
 ```php
     public $resources = [
@@ -20,23 +19,18 @@ Supongamos que se declara el siguiente recurso.
 Luego se crea la clase del recurso
 
 ```php
-use backend\api\v1\models\Store;
-use backend\api\v1\models\StoreSearch;
+use backend\api\v1\models\{Store, StoreSearch};
 
-class StoreResource extends \tecnocen\roa\controllers\Resource
+class StoreResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public $modelClass = Store::class;
+    public $searchClass = StoreSearch::class;
 }
 ```
 
-El modelo `Store` debe de implementar `tecnocen\roa\hal\Embeddable`.
+El modelo `Store` debe de implementar `roaresearch\yii2\roa\hal\Embeddable`.
 
-Propiedades
------------
-
-### Resource::$searchClass
-
-El modelo `StoreSearch` debe implementar `tecnocen\roa\ResourceSearch` y en el
+El modelo `StoreSearch` debe implementar `roaresearch\yii2\roa\ResourceSearch` y en el
 metodo `search()` devolver una instancia de `yii\data\DataProviderInterface` la
 cual genere instancias de `Store`.
 

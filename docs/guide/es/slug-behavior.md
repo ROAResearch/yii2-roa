@@ -1,22 +1,22 @@
 Slug Behavior
 =============
 
-Algunos recursos necesitan estar configurados de forma "aninada" con el fin de que la
-ruta representacional incluya la información de los padres para su consumo.
+Algunos recursos necesitan estar configurados de forma "aninada" con el fin que
+la ruta representacional incluya la información de los padres para su consumo.
 
 `tienda/1/almacen/3/seccion/5`
 
 Con el requerimiento que si no se tienen los permisos para acceder a `tienda/1`
 tampoco se podrá acceder a ninguno de los servicios anidados.
 
-La clase `tecnocen\roa\behaviors\Slug` proporciona funcionalidad para registros
-cuyos recursos se aniden con otros recursos de la misma versión.
+La clase `roaresearch\yii2\roa\behaviors\Slug` proporciona funcionalidad para
+registros cuyos recursos se aniden con otros recursos de la misma versión.
 
 Uso
 ---
 
 ```php
-use tecnocen\roa\behaviors\Slug;
+use roaresearch\yii2\roa\behaviors\Slug;
 
 public function behaviors()
 {
@@ -57,7 +57,7 @@ public function getAlmacen()
 Método checkAccess()
 --------------------
 
-El método `tecnocen\roa\behaviors\Slug::checkAccess()` sirve para que cada
+El método `roaresearch\yii2\roa\behaviors\Slug::checkAccess()` sirve para que cada
 registro compruebe si esta disponible para su acceso. Este método se manda
 invocar retroactivamente en los recursos que tengan declarada al registro
 como relación `parentSlugRelation`.

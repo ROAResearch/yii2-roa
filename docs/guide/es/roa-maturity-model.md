@@ -2,7 +2,7 @@ ROA Definitions
 ===============
 
 ROA es acronimo para [Resource Oriented Architecture] o Arquitectura Orientada a
-Recursos. Esta arquitectura es una especializacion de SOA 
+Recursos. Esta arquitectura es una especializacion de SOA
 [Service Oriented Architecture] o Arquitectura Orientada a Servicios enfocada en
 [Recursos REST] adoptando el formato [HAL].
 
@@ -88,7 +88,7 @@ se devuelve
       "href": "/store/3"
     },
     "encargado": {
-      "description": "Angel", 
+      "description": "Angel",
       "href": "/user/7"
     }
   }
@@ -115,8 +115,8 @@ Ejemplo la llamada `GET /store/1/product?expand=product,store.manager`
     "product_id": "1",
     "inventory": "1028",
     "_links": {
-        
-    }
+
+    },
     "_embedded":{
 
     }
@@ -226,7 +226,7 @@ Ejemplo al solicitar `GET api/v1/tienda/1/venta/3`
 ```json
 {
   "id": 1,
-  "amount",
+  "amount": 1000,
   "_links": {
     "self": {"href": "api/v1/tienda/1/venta/3"},
     "parent_tienda": {"href": "api/v1/tienda/1"},
@@ -254,7 +254,7 @@ separado. De esa forma la peticion
 ```json
 {
   "id": 1,
-  "amount",
+  "amount": 1000,
   "_links": {
     "self": {"href": "api/v1/tienda/1/venta/3"},
     "parent_tienda": {"href": "api/v1/tienda/1"},

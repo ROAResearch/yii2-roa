@@ -9,14 +9,14 @@ The representational route includes the information of the parents for its consu
 With the requirement that if you do not have the permissions to access `shop/1`
 neither will be able to access any of the nested services.
 
-The class `tecnocen\roa\behaviors\Slug` provides functionality for records
+The class `roaresearch\yii2\roa\behaviors\Slug` provides functionality for records
 whose resources are nested with other resources of the same version.
 
 Use
 ---
 
 ```php
-use tecnocen\roa\behaviors\Slug;
+use roaresearch\yii2\roa\behaviors\Slug;
 
 public function behaviors()
 {
@@ -57,18 +57,17 @@ public function getWarehouse()
 Method checkAccess()
 --------------------
 
-The method `technocen\roa\behaviors\Slug::checkAccess()` serves to make each
-Check if it is available for access. This method is sent
-invoke retroactively on the resources declared to the registry
-as a relation `parentSlugRelation`.
+The method `roaresearch\yii2\roa\behaviors\Slug::checkAccess()` serves to make
+each Check if it is available for access. This method is invoked retroactively
+on the resources registered by the property `parentSlugRelation`.
 
 `store/1/warehouse/3/section/5`
 
-When invoking `checkAccess ()` is invoked for store records with id 1,
-warehouse with id 3 and section with id 5.
+When invoking `checkAccess()` is invoked for Store record with id 1,
+Warehouse record with id 3 and Section record with id 5.
 
-The method receives as parameter an `array` with the parameters` GET`
-received in the petition. And it must throw exceptions `yii \ web \ HttpException`
+The method receives as parameter an `array` with the parameters `GET`
+received in the petition. And it must throw exceptions `yii\web\HttpException`
 when access is not allowed.
 
 The complete signature of the firm is
@@ -83,6 +82,6 @@ function checkAccess(string[] $params)
 Links
 -----
 
-Slug behavior has `getSelfLink ()` and `getSlugLinks ()` methods which
+Slug behavior has `getSelfLink()` and `getSlugLinks()` methods which
 automate the creation of relational links by calling recursively
 the related links of the relationships defined in `parentSlugRelation`

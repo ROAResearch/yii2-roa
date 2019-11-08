@@ -6,7 +6,7 @@ The api version container is configured as the application module.
 The versions supported by the API are defined within the container.
 
 The version wrapper module must extend the class
-`tecnocen\roa\modules\ApiContainer`.
+`roaresearch\yii2\roa\modules\ApiContainer`.
 
 Example of Api Container Module
 -----------------------------------
@@ -20,7 +20,7 @@ Example of Api Container Module
 ```
 
 ```php
-class BackendApi extends \tecnocen\roa\modules\ApiContainer
+class BackendApi extends \roaresearch\yii2\roa\modules\ApiContainer
 {
 
    public $identityClass => models\User::class;

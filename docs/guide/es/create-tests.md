@@ -10,14 +10,16 @@ automatizado.
 Interfaz `Tester`
 -----------------
 
-La interfaz `tecnocen\roa\test\Tester` define los metodos que se emplearan para
+La interfaz `roaresearch\yii2\roa\test\Tester` define los metodos que se emplearan para
 probar un recurso ROA desde el punto de vista de un Actor de Codeception.
 
-Para implementarla se puede usar el trato `tecnocen\roa\test\Tester`.
+Para implementarla se puede usar el trato `roaresearch\yii2\roa\test\Tester`.
 
 ```php
-use tecnocen\roa\test\Tester as RoaTester;
-use tecnocen\roa\test\TesterTrait as RoaTesterTrait;
+use roaresearch\yii2\roa\test\{
+    Tester as RoaTester,
+    TesterTrait as RoaTesterTrait
+};
 
 class ApiTester extends \Codeception\Actor implements RoaTester
 {
@@ -31,7 +33,7 @@ La aplicación Yii2 App ROA ya tiene el soporte por defecto.
 Clase `AbstractResourceCest`
 ----------------------------
 
-La clase `tecnocen\roa\test\AbstractResourceCest` provee soporte para realizar
+La clase `roaresearch\yii2\roa\test\AbstractResourceCest` provee soporte para realizar
 pruebas de recursos rest tanto en aplicaciones como en librerias.
 
 ### Uso
@@ -42,9 +44,9 @@ Una vez creada es necesario definir los metodos protegidos `recordJsonType()`
 y `getRoutePattern()`.
 
 ```php
-class ShopCest extends \tecnocen\roa\test\AbstractResourceCest
+class ShopCest extends \roaresearch\yii2\roa\test\AbstractResourceCest
 {
-    
+
     /**
      * @inheritdoc
      */
@@ -92,7 +94,7 @@ caseo de `internalIndex` puede usarse de la siguiente forma:
         $I->wantTo('Retrieve list of Shop records.');
         $this->internalIndex($I, $example);
     }
-   
+
     /**
      * @return array<string,array> for test `index()`.
      */

@@ -34,9 +34,9 @@ The first step is to atomize the API so that each use case has its own
 REST resource. This also allows you to view individual information or by
 collections
 
-Example: Instead of having an `/ inventory` call that has all the stores
-and the products in each store have resources `/ store`,` / product`
-`/ store-product`. The first for store management, the second for
+Example: Instead of having an `/inventory` call that has all the stores
+and the products in each store have resources `/store`,` /product`
+`/store-product`. The first for store management, the second for
 the administration of products and the last one to relate what products exist
 in each store.
 
@@ -44,8 +44,8 @@ in each store.
 
 HTTP Verbs are used to give instructions to each resource.
 
-Example instead of using a call `/ createStore` or` / store / create` is used
-`POST / store` in this way is consistent in all the instructions of
+Example instead of using a call `/createStore` or `/store/create` use
+`POST /store` in this way is consistent in all the instructions of
 all the resources and since it is known that POST is to create, GET to read,
 PATCH to edit and DELETE to agnostically delete the resource.
 
@@ -88,7 +88,7 @@ it is returned
       "href": "/store/3"
     },
     "employee": {
-      "description": "Angel", 
+      "description": "Angel",
       "href": "/user/7"
     }
   }
@@ -115,8 +115,8 @@ Example the call `GET /store/1/product?expand=product,store.manager`
     "product_id": "1",
     "inventory": "1028",
     "_links": {
-        
-    }
+
+    },
     "_embedded": {
 
     }
@@ -141,7 +141,7 @@ HAL as response interface and the same access point for the api.
 For this reason, a maturity model for SOA is detailed here which is
 simplified to then be able to continue defining ROA.
 
-#### SOA 1: Contacts
+#### SOA 1: Contracts
 
 The contract is a document that specifies how certain services receive and
 return information and metadata.
@@ -226,7 +226,7 @@ Example when requesting `GET api/v1/store/1/sale/3`
 ```json
 {
   "id": 1,
-  "amount",
+  "amount": 1000,
   "_links": {
     "self": {"href": "api/v1/store/1/sale/3"},
     "store_parent": {"href": "api/v1/store/1"},
@@ -254,7 +254,7 @@ separated. In that way the petition
 ```json
 {
   "id": 1,
-  "amount",
+  "amount": 1000,
   "_links": {
     "self": {"href": "api/v1/store/1/sale/3"},
     "parent_store": {"href": "api/v1/store/1"},

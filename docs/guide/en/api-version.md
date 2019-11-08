@@ -2,7 +2,7 @@ Api Version
 ===========
 
 The api versions declared in the version container are modules that
-they extend the class `tecnocen\roa\modules\ApiVersion`.
+they extend the class `roaresearch\yii2\roa\modules\ApiVersion`.
 
 Each version defines its list of resources and the life cycle of its publication.
 
@@ -10,7 +10,7 @@ Version Class Demo
 ------------------------
 
 ```php
-V1Version extends \tecnocen\roa\modules\ApiVersion
+V1Version extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $releaseDate = '2010-06-15';
     public $deprecationDate = '2012-01-01';
@@ -175,7 +175,7 @@ This process is automatic as soon as the container detects a version with a
 Date `$obsoleteDate` less than the current date.
 
 Version information resource
----------------------------------
+----------------------------
 
 When accessing the base route of the version you can find the documentation of
 their life cycle, collection of routes and apidoc.

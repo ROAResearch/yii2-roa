@@ -1,7 +1,7 @@
 ROA Resource Class
 ====================
 
-Class `tecnocen\roa\controllers\Resource` is the class that is offered to create ROA 
+Class `roaresearch\yii2\roa\controllers\Resource` is the class that is offered to create ROA
 controllers/resources.
 
 Resource Demo
@@ -18,15 +18,17 @@ It is recommended to create specialized models that serve as contracts that
 extend the basic functionality to obtain HAL support.
 
 ```php
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use roaresearch\yii2\roa\{
+    behaviors\Curies,
+    behaviors\Slug,
+    hal\Embeddable,
+    hal\EmbeddableTrait
+};
 use yii\web\Linkable;
 
 class Shop extends \common\models\Shop implements Embeddable, Linkable
 {
-    use \tecnocen\roa\hal\EmbeddableTrait;
+    use EmbeddableTrait;
 
     public function behaviors()
     {
@@ -51,7 +53,7 @@ class Shop extends \common\models\Shop implements Embeddable, Linkable
         return ['employees'];
     }
 }
-``` 
+```
 
 See [slug-behavior.md],
 
@@ -61,7 +63,7 @@ You must declare the new resource in this array where the key is the path
 bijective of the class.
 
 ```php
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $resources = [
         'shop' => [
@@ -77,10 +79,9 @@ See [routing.md].
 ### Resource Class.
 
 ```php
-use backend\api\v1\models\Store;
-use backend\api\v1\models\StoreSearch;
+use backend\api\v1\models\{Store, StoreSearch};
 
-class StoreResource extends \tecnocen\roa\controllers\Resource
+class StoreResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public $modelClass = Store::class;
 
@@ -112,7 +113,7 @@ Property that defines the model that creates the dataprovider for searches and
 pages of the site as well as the contract of the attributes that can be sent
 to a search.
 
-If this property is null then the resource will create a dataprovider through
+If this property is `null` then the resource will create a dataprovider through
 methods `baseQuery()` and `indexQuery()`.
 
 The model must implement a method `search()` to return an instance of

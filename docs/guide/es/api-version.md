@@ -2,7 +2,7 @@ Api Versión
 ===========
 
 Las versiones de api declaradas en el contenedor de versiones son módulos que
-extienden la clase `tecnocen\roa\modules\ApiVersion`.
+extienden la clase `roaresearch\yii2\roa\modules\ApiVersion`.
 
 Cada versión define su lista de recursos y el ciclo de vida de su publicación.
 
@@ -10,7 +10,7 @@ Demo de Clase de Versión
 ------------------------
 
 ```php
-V1Version extends \tecnocen\roa\modules\ApiVersion
+V1Version extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $releaseDate = '2010-06-15';
     public $deprecationDate = '2012-01-01';

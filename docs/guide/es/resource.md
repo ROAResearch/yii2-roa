@@ -1,7 +1,7 @@
 Clase de Recurso ROA
 ====================
 
-La clase `tecnocen\roa\controllers\Resource` es la clase que se ofrece
+La clase `roaresearch\yii2\roa\controllers\Resource` es la clase que se ofrece
 para crear controladores/recursos de ROA.
 
 Demo de recurso
@@ -18,15 +18,17 @@ Se recomienda crear modelos especializados que sirvan como contratos que
 extiendan la funcionalidad basica para obtener soporte de HAL.
 
 ```php
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use roaresearch\yii2\roa\{
+    behaviors\Curies,
+    behaviors\Slug,
+    hal\Embeddable,
+    hal\EmbeddableTrait
+};
 use yii\web\Linkable;
 
 class Shop extends \common\models\Shop implements Embeddable, Linkable
 {
-    use \tecnocen\roa\hal\EmbeddableTrait;
+    use EmbeddableTrait;
 
     public function behaviors()
     {
@@ -51,7 +53,7 @@ class Shop extends \common\models\Shop implements Embeddable, Linkable
         return ['employees'];
     }
 }
-``` 
+```
 
 Ver [slug-behavior.md],
 
@@ -61,7 +63,7 @@ Se debe declarar el nuevo recurso en este arreglo donde la llave es la ruta
 biunivoca de la clase.
 
 ```php
-class V1 extends \tecnocen\roa\modules\ApiVersion
+class V1 extends \roaresearch\yii2\roa\modules\ApiVersion
 {
     public $resources = [
         'shop' => [
@@ -77,10 +79,9 @@ Ver [routing.md].
 ### Clase de Recurso.
 
 ```php
-use backend\api\v1\models\Store;
-use backend\api\v1\models\StoreSearch;
+use backend\api\v1\models\{Store, StoreSearch};
 
-class StoreResource extends \tecnocen\roa\controllers\Resource
+class StoreResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     public $modelClass = Store::class;
 
