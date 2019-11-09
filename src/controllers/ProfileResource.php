@@ -1,11 +1,9 @@
 <?php
 
-namespace tecnocen\roa\controllers;
+namespace roaresearch\yii2\roa\controllers;
 
-use tecnocen\roa\actions\ProfileUpdate;
-use tecnocen\roa\actions\ProfileView;
-use yii\filters\VerbFilter;
-use yii\rest\OptionsAction;
+use roaresearch\yii2\roa\actions\{ProfileUpdate, ProfileView};
+use yii\{filters\VerbFilter, rest\OptionsAction};
 
 class ProfileResource extends \yii\rest\Controller
 {

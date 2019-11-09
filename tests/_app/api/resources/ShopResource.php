@@ -2,7 +2,7 @@
 
 namespace app\api\resources;
 
-use tecnocen\roa\actions\SoftDelete as ActionSoftDelete;
+use roaresearch\yii2\roa\actions\SoftDelete as ActionSoftDelete;
 use app\api\models\{Shop, ShopSearch};
 use yii\db\ActiveQuery;
 
@@ -10,7 +10,7 @@ use yii\db\ActiveQuery;
  * CRUD resource for `Shop` records
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class ShopResource extends \tecnocen\roa\controllers\Resource
+class ShopResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     /**
      * @inheritdoc

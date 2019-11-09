@@ -4,7 +4,7 @@ namespace app\api\resources;
 
 use app\api\models\{Employee, EmployeeSearch};
 use app\models\SoftDeleteQuery;
-use tecnocen\roa\{
+use roaresearch\yii2\roa\{
     actions\SoftDelete as ActionSoftDelete,
     controllers\Resource
 };

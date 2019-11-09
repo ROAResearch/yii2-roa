@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\urlRules;
+namespace roaresearch\yii2\roa\urlRules;
 
 /**
  * Rule for routing response streams to access a file for download or view it

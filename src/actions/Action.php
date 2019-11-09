@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\actions;
+namespace roaresearch\yii2\roa\actions;
 
 use yii\db\ActiveRecordInterface;
 
@@ -11,8 +11,10 @@ class Action extends \yii\rest\Action
      * @param array $params
      * @throws \yii\web\HTTPException
      */
-    public function checkAccess(ActiveRecordInterface $model, array $params = [])
-    {
+    public function checkAccess(
+        ActiveRecordInterface $model,
+        array $params = []
+    ) {
         $this->controller->checkAccess($this->id, $model, $params);
         if ($model->hasMethod('checkAccess')) {
             $model->checkAccess($params);

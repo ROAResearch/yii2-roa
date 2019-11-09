@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class ShopSearch extends Shop implements \tecnocen\roa\ResourceSearch
+class ShopSearch extends Shop implements \roaresearch\yii2\roa\ResourceSearch
 {
     /**
      * @inhertidoc

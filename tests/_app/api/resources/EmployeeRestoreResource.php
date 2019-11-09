@@ -4,7 +4,7 @@ namespace app\api\resources;
 
 use app\api\models\Employee;
 use app\models\SoftDeleteQuery;
-use tecnocen\roa\controllers\RestoreResource;
+use roaresearch\yii2\roa\controllers\RestoreResource;
 use yii\db\ActiveQuery;
 
 /**

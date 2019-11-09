@@ -1,9 +1,8 @@
 <?php
 
-namespace tecnocen\roa\behaviors;
+namespace roaresearch\yii2\roa\behaviors;
 
-use yii\helpers\Url;
-use yii\web\Link;
+use yii\{helpers\Url, web\Link};
 
 /**
  * Behavior to autogenerate curies links.

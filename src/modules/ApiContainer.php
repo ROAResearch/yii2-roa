@@ -1,21 +1,25 @@
 <?php
 
-namespace tecnocen\roa\modules;
+namespace roaresearch\yii2\roa\modules;
 
-use tecnocen\oauth2server\filters\auth\CompositeAuth;
-use tecnocen\oauth2server\Module as OAuth2Module;
-use tecnocen\roa\controllers\ApiContainerController;
-use tecnocen\roa\urlRules\Composite as CompositeUrlRule;
-use tecnocen\roa\urlRules\Modular as ModularUrlRule;
-use tecnocen\roa\urlRules\UrlRuleCreator;
+use roaresearch\yii2\oauth2server\filters\auth\CompositeAuth;
+use roaresearch\yii2\oauth2server\Module as OAuth2Module;
+use roaresearch\yii2\roa\{
+    controllers\ApiContainerController,
+    urlRules\Composite as CompositeUrlRule,
+    urlRules\Modular as ModularUrlRule,
+    urlRules\UrlRuleCreator
+};
 use Yii;
-use yii\base\BootstrapInterface;
-use yii\base\InvalidArgumentException;
-use yii\base\Module;
-use yii\filters\ContentNegotiator;
-use yii\helpers\Url;
-use yii\web\Response;
-use yii\web\UrlNormalizer;
+use yii\{
+    base\BootstrapInterface,
+    base\InvalidArgumentException,
+    base\Module,
+    filters\ContentNegotiator,
+    helpers\Url,
+    web\Response,
+    web\UrlNormalizer
+};
 
 /**
  * @author Angel (Faryshta) Guevara <aguevara@tecnocen.com>

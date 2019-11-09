@@ -1,20 +1,24 @@
 <?php
 
-namespace tecnocen\roa\modules;
+namespace roaresearch\yii2\roa\modules;
 
 use DateTime;
-use tecnocen\roa\controllers\ApiVersionController;
-use tecnocen\roa\urlRules\Composite as CompositeUrlRule;
-use tecnocen\roa\urlRules\Resource as ResourceUrlRule;
-use tecnocen\roa\urlRules\UrlRuleCreator;
+use roaresearch\yii2\roa\{
+    controllers\ApiVersionController,
+    urlRules\Composite as CompositeUrlRule,
+    urlRules\Resource as ResourceUrlRule,
+    urlRules\UrlRuleCreator
+};
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\web\JsonResponseFormatter;
-use yii\web\Response;
-use yii\web\UrlManager;
-use yii\web\XmlResponseFormatter;
+use yii\{
+    base\InvalidConfigException,
+    helpers\ArrayHelper,
+    helpers\Url,
+    web\JsonResponseFormatter,
+    web\Response,
+    web\UrlManager,
+    web\XmlResponseFormatter
+};
 
 /**
  * Class to attach a version to an `ApiContainer` module.
@@ -119,7 +123,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
      *     'profile/history', // resources\profile\HistoryResource
      *     'profile/image' => [
      *         'class' => resources\profile\ImageResource::class,
-     *         'urlRule' => ['class' => 'tecnocen\\roa\\urlRules\\File'],
+     *         'urlRule' => ['class' => 'roaresearch\yii2\\roa\\urlRules\\File'],
      *     ],
      *     'post' => ['class' => resources\post\PostResource::class],
      *     'post/<post_id:[\d]+>/reply', // resources\post\ReplyResource

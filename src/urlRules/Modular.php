@@ -1,10 +1,9 @@
 <?php
 
-namespace tecnocen\roa\urlRules;
+namespace roaresearch\yii2\roa\urlRules;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\web\NotFoundHttpException;
+use yii\{base\InvalidConfigException, web\NotFoundHttpException};
 
 /**
  * Url Rule to handle modules implementing the `UrlRuleCreator` interface.
@@ -59,7 +58,7 @@ class Modular extends Composite
     /**
      * @inheritdoc
      */
-    protected function createNotFoundException()
+    protected function createNotFoundException(): NotFoundHttpException
     {
         return new NotFoundHttpException(
             strtr($this->notFoundMessage, ['{moduleId}' => $this->moduleId])

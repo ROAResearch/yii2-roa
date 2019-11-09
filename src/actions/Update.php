@@ -1,10 +1,9 @@
 <?php
 
-namespace tecnocen\roa\actions;
+namespace roaresearch\yii2\roa\actions;
 
 use Yii;
-use yii\base\Model;
-use yii\web\ServerErrorHttpException;
+use yii\{base\Model, web\ServerErrorHttpException};
 
 /**
  * Action to update the attributes in a record.

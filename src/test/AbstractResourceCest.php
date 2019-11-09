@@ -1,9 +1,9 @@
 <?php
 
-namespace tecnocen\roa\test;
+namespace roaresearch\yii2\roa\test;
 
 use Codeception\{Example, Util\HttpCode};
-use tecnocen\roa\urlRules\Resource as ResourceUrlRule;
+use roaresearch\yii2\roa\urlRules\Resource as ResourceUrlRule;
 use yii\web\UrlManager;
 
 abstract class AbstractResourceCest
@@ -52,7 +52,7 @@ abstract class AbstractResourceCest
      *   `getRoutePattern()`.
      * @return string the url which will be used for the service.
      */
-    protected function parseUrl(Example $example)
+    protected function parseUrl(Example $example): string
     {
         if (isset($example['url'])) {
             return $example['url'];
@@ -360,10 +360,10 @@ abstract class AbstractResourceCest
      * @return array
      * @see http://codeception.com/docs/modules/REST#seeResponseMatchesJsonType
      */
-    abstract protected function recordJsonType();
+    abstract protected function recordJsonType(): array;
 
     /**
      * @return string route pattern to create the
      */
-    abstract protected function getRoutePattern();
+    abstract protected function getRoutePattern(): string;
 }

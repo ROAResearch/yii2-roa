@@ -1,11 +1,11 @@
 <?php
 
-namespace tecnocen\roa\controllers;
+namespace roaresearch\yii2\roa\controllers;
 
 /**
  * Shows the fact sheet for the api version its contained.
  *
- * @property \tecnocen\roa\modules\ApiVersion $module
+ * @property \roaresearch\yii2\roa\modules\ApiVersion $module
  *
  * @author Angel (Faryshta) Guevara <aguevara@tecnocen.com>
  */

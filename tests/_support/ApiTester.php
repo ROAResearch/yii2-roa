@@ -1,7 +1,7 @@
 <?php
 
-use tecnocen\roa\test\Tester as RoaTester;
-use tecnocen\roa\test\TesterTrait as RoaTesterTrait;
+use roaresearch\yii2\roa\test\Tester as RoaTester;
+use roaresearch\yii2\roa\test\TesterTrait as RoaTesterTrait;
 
 /**
  * Inherited Methods

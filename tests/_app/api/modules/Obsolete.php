@@ -2,10 +2,10 @@
 
 namespace app\api\modules;
 
-use tecnocen\roa\controllers\ProfileResource;
-use tecnocen\roa\urlRules\SingleRecord;
+use roaresearch\yii2\roa\controllers\ProfileResource;
+use roaresearch\yii2\roa\urlRules\SingleRecord;
 
-class Obsolete extends \tecnocen\roa\modules\ApiVersion
+class Obsolete extends \roaresearch\yii2\roa\modules\ApiVersion
 {
 
     public $releaseDate = '2010-06-15';

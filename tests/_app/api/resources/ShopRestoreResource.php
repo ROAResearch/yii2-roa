@@ -3,7 +3,7 @@
 namespace app\api\resources;
 
 use app\api\models\Shop;
-use tecnocen\roa\controllers\RestoreResource;
+use roaresearch\yii2\roa\controllers\RestoreResource;
 use yii\db\ActiveQuery;
 
 /**

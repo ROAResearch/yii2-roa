@@ -1,11 +1,13 @@
 <?php
 
-namespace tecnocen\roa\behaviors;
+namespace roaresearch\yii2\roa\behaviors;
 
-use yii\base\InvalidConfigException;
-use yii\db\BaseActiveRecord;
-use yii\helpers\Url;
-use yii\web\NotFoundHttpException;
+use yii\{
+    base\InvalidConfigException,
+    db\BaseActiveRecord,
+    helpers\Url,
+    web\NotFoundHttpException
+};
 
 /**
  * Behavior to handle slug componentes linked as parent-child relations.
@@ -112,7 +114,7 @@ class Slug extends \yii\base\Behavior
         if (null === $this->parentSlug) {
             throw new NotFoundHttpException(
                 strtr(
-                    $this->parentNotFoundMessage, 
+                    $this->parentNotFoundMessage,
                     [
                         '{resourceName}' => $this->parentSlugRelation,
                     ]

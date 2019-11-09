@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class SaleSearch extends Sale implements \tecnocen\roa\ResourceSearch
+class SaleSearch extends Sale implements \roaresearch\yii2\roa\ResourceSearch
 {
     /**
      * @inhertidoc

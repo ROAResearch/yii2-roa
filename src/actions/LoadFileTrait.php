@@ -1,9 +1,8 @@
 <?php
 
-namespace tecnocen\roa\actions;
+namespace roaresearch\yii2\roa\actions;
 
-use yii\base\Model;
-use yii\web\UploadedFile;
+use yii\{base\Model, web\UploadedFile};
 
 /**
  * Trait to configure and load uploaded files to a model.

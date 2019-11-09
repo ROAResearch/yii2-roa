@@ -1,16 +1,18 @@
 <?php
 
-namespace tecnocen\roa\controllers;
+namespace roaresearch\yii2\roa\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
-use yii\web\GoneHttpException;
-use yii\web\NotFoundHttpException;
+use yii\{
+    helpers\ArrayHelper,
+    web\GoneHttpException,
+    web\NotFoundHttpException
+};
 
 /**
  * Lists all the available versions for an api and handles error responses.
  *
- * @property \tecnocen\roa\modules\ApiContainer $module
+ * @property \roaresearch\yii2\roa\modules\ApiContainer $module
  *
  * @author Angel (Faryshta) Guevara <aguevara@tecnocen.com>
  */

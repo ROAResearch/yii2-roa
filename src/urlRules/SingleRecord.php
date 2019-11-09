@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\urlRules;
+namespace roaresearch\yii2\roa\urlRules;
 
 /**
  * Rule for routing resources which will only handle a record per authorized

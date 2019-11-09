@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\actions;
+namespace roaresearch\yii2\roa\actions;
 
 use Yii;
 use yii\web\ServerErrorHttpException;

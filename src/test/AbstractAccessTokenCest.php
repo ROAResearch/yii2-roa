@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\test;
+namespace roaresearch\yii2\roa\test;
 
 use Codeception\{Example, Util\HttpCode};
 

@@ -3,8 +3,8 @@
 use app\api\modules\Obsolete;
 use app\api\modules\Version;
 use app\models\User;
-use tecnocen\roa\modules\ApiVersion;
-use tecnocen\roa\urlRules\SingleRecord;
+use roaresearch\yii2\roa\modules\ApiVersion;
+use roaresearch\yii2\roa\urlRules\SingleRecord;
 
 return yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/common.php',
@@ -13,7 +13,7 @@ return yii\helpers\ArrayHelper::merge(
         'bootstrap' => ['api'],
         'modules' => [
             'api' => [
-                'class' => tecnocen\roa\modules\ApiContainer::class,
+                'class' => roaresearch\yii2\roa\modules\ApiContainer::class,
                 'identityClass' => User::class,
                 'versions' => [
                     'v1' => [

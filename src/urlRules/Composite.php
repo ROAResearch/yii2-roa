@@ -1,12 +1,14 @@
 <?php
 
-namespace tecnocen\roa\urlRules;
+namespace roaresearch\yii2\roa\urlRules;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\web\NotFoundHttpException;
-use yii\web\UrlManager;
-use yii\web\UrlNormalizer;
+use yii\{
+    base\InvalidConfigException,
+    web\NotFoundHttpException,
+    web\UrlManager,
+    web\UrlNormalizer
+};
 
 /**
  * Url rule that can call children rule when applicable.
@@ -141,7 +143,7 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     /**
      * @return NotFoundHttpException
      */
-    protected function createNotFoundException()
+    protected function createNotFoundException(): NotFoundHttpException
     {
         return new NotFoundHttpException($this->notFoundMessage);
     }

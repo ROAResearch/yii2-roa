@@ -1,9 +1,8 @@
 <?php
 
-namespace tecnocen\roa\hal;
+namespace roaresearch\yii2\roa\hal;
 
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
+use roaresearch\yii2\roa\behaviors\{Curies, Slug};
 
 /**
  * Trait which gives the basic support for HAL contracts.

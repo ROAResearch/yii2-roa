@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\hal;
+namespace roaresearch\yii2\roa\hal;
 
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;

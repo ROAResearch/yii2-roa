@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
 /**
  * Resource to
  */
-class SaleItemResource extends \tecnocen\roa\controllers\Resource
+class SaleItemResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     /**
      * @inheritdoc

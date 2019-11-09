@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa;
+namespace roaresearch\yii2\roa;
 
 /**
  * Interface to get a the information of a file associated to a model.

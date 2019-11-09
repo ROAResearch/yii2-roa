@@ -1,8 +1,8 @@
 <?php
 
-namespace tecnocen\roa\controllers;
+namespace roaresearch\yii2\roa\controllers;
 
-use tecnocen\roa\actions\Restore;
+use roaresearch\yii2\roa\actions\Restore;
 
 /**
  * Resource to handle restoration of soft deleted records.

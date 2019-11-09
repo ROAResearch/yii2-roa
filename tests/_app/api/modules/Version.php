@@ -12,7 +12,7 @@ use app\api\resources\{
     ShopRestoreResource,
     ShopResource
 };
-use tecnocen\roa\{
+use roaresearch\yii2\roa\{
     controllers\ProfileResource,
     modules\ApiVersion,
     urlRules\Profile as ProfileUrlRule,

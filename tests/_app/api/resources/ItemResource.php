@@ -3,7 +3,7 @@
 namespace app\api\resources;
 
 use app\api\models\Item;
-use tecnocen\roa\{
+use roaresearch\yii2\roa\{
     actions\SafeDelete as ActionSafeDelete,
     controllers\Resource
 };

@@ -2,8 +2,8 @@
 
 namespace app\fixtures;
 
-use tecnocen\oauth2server\models\OauthAccessTokens;
-use tecnocen\oauth2server\fixtures\OauthClientsFixture;
+use roaresearch\yii2\oauth2server\models\OauthAccessTokens;
+use roaresearch\yii2\oauth2server\fixtures\OauthClientsFixture;
 
 class OauthAccessTokensFixture extends \yii\test\ActiveFixture
 {

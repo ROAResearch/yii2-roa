@@ -3,22 +3,22 @@
 namespace resources;
 
 use ApiTester;
-
-use app\fixtures\ItemFixture;
-use app\fixtures\EmployeeFixture;
-use app\fixtures\OauthAccessTokensFixture;
-use app\fixtures\ShopFixture;
-use app\fixtures\SaleFixture;
-use app\fixtures\SaleItemFixture;
-use Codeception\Example;
-use Codeception\Util\HttpCode;
+use app\fixtures\{
+    ItemFixture,
+    EmployeeFixture,
+    OauthAccessTokensFixture,
+    ShopFixture,
+    SaleFixture,
+    SaleItemFixture
+};
+use Codeception\{Example, Util\HttpCode};
 
 /**
  * Cest to shop resource.
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class ShopCest extends \tecnocen\roa\test\AbstractResourceCest
+class ShopCest extends \roaresearch\yii2\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
     {
@@ -234,7 +234,7 @@ class ShopCest extends \tecnocen\roa\test\AbstractResourceCest
     /**
      * @inheritdoc
      */
-    protected function recordJsonType()
+    protected function recordJsonType(): array
     {
         return [
             'id' => 'integer:>0',
@@ -245,7 +245,7 @@ class ShopCest extends \tecnocen\roa\test\AbstractResourceCest
     /**
      * @inheritdoc
      */
-    protected function getRoutePattern()
+    protected function getRoutePattern(): string
     {
         return 'v1/shop';
     }

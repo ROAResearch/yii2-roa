@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\urlRules;
+namespace roaresearch\yii2\roa\urlRules;
 
 interface UrlRuleCreator
 {

@@ -1,6 +1,6 @@
 <?php
 
-class m130101_000006_shop_sale_item extends \tecnocen\migrate\CreateTableMigration
+class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTableMigration
 {
     public $defaultOnDelete = 'RESTRICT';
     

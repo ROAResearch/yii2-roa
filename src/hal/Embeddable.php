@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa\hal;
+namespace roaresearch\yii2\roa\hal;
 
 /**
  * Interface to get a the information of a file associated to a model.

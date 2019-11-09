@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\roa;
+namespace roaresearch\yii2\roa;
 
 use yii\data\ActiveDataProvider;
 

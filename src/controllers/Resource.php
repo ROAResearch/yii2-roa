@@ -1,15 +1,20 @@
 <?php
 
-namespace tecnocen\roa\controllers;
+namespace roaresearch\yii2\roa\controllers;
 
-use tecnocen\roa\{actions, FileRecord};
+use roaresearch\yii2\roa\{actions, FileRecord};
 use Yii;
-use yii\base\InvalidRouteException;
-use yii\data\ActiveDataProvider;
-use yii\db\{ActiveQuery, ActiveRecord};
-use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
-use yii\web\{MethodNotAllowedHttpException, NotFoundHttpException};
+use yii\{
+    base\InvalidRouteException,
+    data\ActiveDataProvider,
+    db\ActiveQuery,
+    db\ActiveRecord,
+    db\ActiveRecordInterface,
+    filters\VerbFilter,
+    helpers\ArrayHelper,
+    web\MethodNotAllowedHttpException,
+    web\NotFoundHttpException
+};
 
 /**
  * Resource Controller with OAuth2 Support.
@@ -45,7 +50,7 @@ class Resource extends \yii\rest\ActiveController
 
     /**
      * @var string class name for the model to be used on the search.
-     * Must implement `tecnocen\roa\ResourceSearchInterface`
+     * Must implement `roaresearch\yii2\roa\ResourceSearchInterface`
      */
     public $searchClass;
 
@@ -172,10 +177,10 @@ class Resource extends \yii\rest\ActiveController
     /**
      * Finds the record based on the provided id or throws an exception.
      * @param int $id the unique identifier for the record.
-     * @return ActiveRecord
+     * @return ActiveRecordInterface
      * @throws NotFoundHttpException if the record can't be found.
      */
-    public function findModel($id): ActiveRecord
+    public function findModel($id): ActiveRecordInterface
     {
         if (null === ($model = $this->findQuery($id)->one())) {
             throw new NotFoundHttpException(
@@ -220,7 +225,7 @@ class Resource extends \yii\rest\ActiveController
     }
 
     /**
-     * @return the conditions to filter the base query to find records.
+     * @return array the conditions to filter the base query to find records.
      */
     protected function filterCondition(): array
     {

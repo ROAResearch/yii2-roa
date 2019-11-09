@@ -4,15 +4,14 @@ namespace resources;
 
 use ApiTester;
 use app\fixtures\OauthAccessTokensFixture;
-use Codeception\Example;
-use Codeception\Util\HttpCode;
+use Codeception\{Example, Util\HttpCode};
 
 /**
  * Cest to Sale resource.
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class SaleCest extends \tecnocen\roa\test\AbstractResourceCest
+class SaleCest extends \roaresearch\yii2\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
     {
@@ -55,7 +54,7 @@ class SaleCest extends \tecnocen\roa\test\AbstractResourceCest
     /**
      * @inheritdoc
      */
-    protected function recordJsonType()
+    protected function recordJsonType(): array
     {
         return [
             'id' => 'integer:>0',
@@ -67,7 +66,7 @@ class SaleCest extends \tecnocen\roa\test\AbstractResourceCest
     /**
      * @inheritdoc
      */
-    protected function getRoutePattern()
+    protected function getRoutePattern(): string
     {
         return 'v1/shop/<shop_id:\d+>/employee/<employe_id:\d+>/sale';
     }

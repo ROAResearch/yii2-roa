@@ -2,8 +2,7 @@
 
 namespace app\api\models;
 
-use tecnocen\roa\hal\Contract;
-use tecnocen\roa\hal\ContractTrait;
+use roaresearch\yii2\roa\hal\{Contract, ContractTrait};
 
 /**
  * ROA contract to handle shop sale records.

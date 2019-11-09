@@ -1,6 +1,6 @@
 <?php
 
-class m130101_000004_shop_sale extends \tecnocen\migrate\CreateTableMigration
+class m130101_000004_shop_sale extends \roaresearch\yii2\migrate\CreateTableMigration
 {
 
     /**

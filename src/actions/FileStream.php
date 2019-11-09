@@ -1,8 +1,8 @@
 <?php
 
-namespace tecnocen\roa\actions;
+namespace roaresearch\yii2\roa\actions;
 
-use tecnocen\roa\FileRecord;
+use roaresearch\yii2\roa\FileRecord;
 
 use Yii;
 use yii\base\InvalidConfigException;

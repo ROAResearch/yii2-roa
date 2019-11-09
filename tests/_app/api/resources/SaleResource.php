@@ -4,13 +4,13 @@ namespace app\api\resources;
 
 use app\api\models\{Sale, SaleSearch};
 use app\models\SoftDeleteQuery;
-use tecnocen\roa\actions\SafeDelete as ActionSafeDelete;
+use roaresearch\yii2\roa\actions\SafeDelete as ActionSafeDelete;
 use yii\db\ActiveQuery;
 
 /**
  * Resource to
  */
-class SaleResource extends \tecnocen\roa\controllers\Resource
+class SaleResource extends \roaresearch\yii2\roa\controllers\Resource
 {
     /**
      * @inheritdoc
