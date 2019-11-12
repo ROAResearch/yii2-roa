@@ -6,7 +6,7 @@ class m130101_000005_item extends \roaresearch\yii2\migrate\CreateTableMigration
     /**
      * @inhertidoc
      */
-    public function getTableName()
+    public function getTableName(): string
     {
         return 'item';
     }
@@ -14,7 +14,7 @@ class m130101_000005_item extends \roaresearch\yii2\migrate\CreateTableMigration
     /**
      * @inhertidoc
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'id' => $this->primaryKey(),

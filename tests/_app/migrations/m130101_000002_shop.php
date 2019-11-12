@@ -6,7 +6,7 @@ class m130101_000002_shop extends \roaresearch\yii2\migrate\CreateTableMigration
     /**
      * @inhertidoc
      */
-    public function getTableName()
+    public function getTableName(): string
     {
         return 'shop';
     }
@@ -14,7 +14,7 @@ class m130101_000002_shop extends \roaresearch\yii2\migrate\CreateTableMigration
     /**
      * @inhertidoc
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'id' => $this->primaryKey(),

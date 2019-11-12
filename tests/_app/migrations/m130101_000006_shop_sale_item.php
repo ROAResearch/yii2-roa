@@ -2,12 +2,15 @@
 
 class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTableMigration
 {
+    /**
+     * @inhertidoc
+     */
     public $defaultOnDelete = 'RESTRICT';
     
     /**
      * @inhertidoc
      */
-    public function getTableName()
+    public function getTableName(): string
     {
         return 'shop_sale_item';
     }
@@ -15,7 +18,7 @@ class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTabl
     /**
      * @inhertidoc
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'item_id' => $this->normalKey(),
@@ -26,7 +29,7 @@ class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTabl
     /**
      * @inhertidoc
      */
-    public function compositePrimaryKeys()
+    public function compositePrimaryKeys(): array
     {
         return ['item_id', 'sale_id'];
     }
@@ -34,7 +37,7 @@ class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTabl
     /**
      * @inhertidoc
      */
-    public function foreignKeys()
+    public function foreignKeys(): array
     {
         return [
             'item_id' => 'item',
