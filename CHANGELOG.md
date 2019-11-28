@@ -1,6 +1,12 @@
 Yii2 ROA Library
 ================
 
+2.0.0
+-----
+
+- [Brk] PSR12 support
+- [Brk] Namespace change.
+
 0.5.0 July 13, 2019
 -------------------------
 

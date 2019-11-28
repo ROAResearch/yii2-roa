@@ -27,7 +27,7 @@ before_script:
   - mysql --version
             
   # initialize database
-  - mysql -e "create database yii2_oauth2_server_test"
+  - mysql -e "create database yii2_roa_test"
 
 script:
   - composer deploy-tests
