@@ -8,7 +8,7 @@ use yii\db\ActiveQuery;
 
 /**
  * CRUD resource for `Shop` records
- * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ * @author Carlos (neverabe) Llamosas <carlos@invernaderolabs.com>
  */
 class ShopResource extends \roaresearch\yii2\roa\controllers\Resource
 {

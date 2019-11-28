@@ -9,7 +9,7 @@ use Codeception\{Example, Util\HttpCode};
 /**
  * Cest to Sale resource.
  *
- * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ * @author Carlos (neverabe) Llamosas <carlos@invernaderolabs.com>
  */
 class SaleCest extends \roaresearch\yii2\roa\test\AbstractResourceCest
 {

@@ -8,7 +8,7 @@ use yii\web\NotFoundHttpException;
 /**
  * Contract to filter and sort collections of `Sale` records.
  *
- * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ * @author Carlos (neverabe) Llamosas <carlos@invernaderolabs.com>
  */
 class SaleSearch extends Sale implements \roaresearch\yii2\roa\ResourceSearch
 {
