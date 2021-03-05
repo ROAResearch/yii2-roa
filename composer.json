@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "ext-curl": "*",
-        "codeception/base": "~3.1.0",
+        "codeception/base": "~4.1.0",
         "flow/jsonpath": "~0.3",
         "phpunit/php-code-coverage": "~5.0.0",
         "codeception/verify": "~1.2.0",
