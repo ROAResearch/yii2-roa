@@ -21,9 +21,9 @@ use roaresearch\yii2\roa\{
 
 class Version extends ApiVersion
 {
-    public $releaseDate = '2018-06-15';
-    public $deprecationDate = '2020-01-01';
-    public $obsoleteDate = '2020-12-31';
+    public $releaseDate = '2020-06-15';
+    public $deprecationDate = '2025-01-01';
+    public $obsoleteDate = '2025-12-31';
 
     const ITEM_ROUTE = 'item';
     const ITEM_RESTORE_ROUTE = 'item-restore';

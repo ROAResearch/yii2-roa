@@ -1,16 +1,14 @@
 
 # faster builds on new travis setup not using sudo
-sudo: false
-
 language: php
 
 services:
   - mysql
 
 php:
-  - 7.1
-  - 7.2
   - 7.3
+  - 7.4
+  - 8.0
   - nightly
 
 matrix:
@@ -28,11 +26,6 @@ before_script:
             
   # initialize database
   - mysql -e "create database yii2_roa_test"
-
-script:
-  - composer deploy-tests
-  - composer run-tests
-
 
 script:
   - composer deploy-tests
