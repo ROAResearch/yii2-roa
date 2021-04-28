@@ -17,18 +17,17 @@ class Delete extends Action
      *
      * @param mixed $id the identifier value.
      */
-    public function run($id)
+    public function run($id): void
     {
         $this->checkAccess(
             ($model = $this->findModel($id)),
             Yii::$app->request->getQueryParams()
         );
 
-        if (false === $model->delete()) {
-            throw new ServerErrorHttpException(
-                'Failed to delete the object for unknown reason.'
-            );
-        }
+        false !== $model->delete() ?: throw new ServerErrorHttpException(
+            'Failed to delete the object for unknown reason.'
+        );
+
         Yii::$app->getResponse()->setStatusCode(204);
     }
 }

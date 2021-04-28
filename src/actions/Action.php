@@ -2,25 +2,18 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use yii\db\ActiveRecordInterface;
+use roaresearch\yii2\roa\hal\ARContract;
 
 class Action extends \yii\rest\Action
 {
     /**
-     * @param ActiveRecordInterface $model
+     * @param ARContract $model
      * @param array $params
      * @throws \yii\web\HTTPException
      */
-    public function checkAccess(
-        ActiveRecordInterface $model,
-        array $params = []
-    ) {
+    public function checkAccess(ARContract $model, array $params = []): void
+    {
         $this->controller->checkAccess($this->id, $model, $params);
-        if ($model->hasMethod('checkAccess')) {
-            $model->checkAccess($params);
-        }
-        if (isset($this->checkAccess)) {
-            call_user_func($this->checkAccess, $this, $model, $params);
-        }
+        $model->checkAccess($params, $this);
     }
 }

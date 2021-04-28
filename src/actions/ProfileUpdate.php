@@ -3,14 +3,14 @@
 namespace roaresearch\yii2\roa\actions;
 
 use Yii;
-use yii\{base\Model, web\ServerErrorHttpException};
+use yii\{base\Model, db\ActiveRecordInterface, web\ServerErrorHttpException};
 
 class ProfileUpdate extends \yii\rest\Action
 {
     /**
      * @var string the scenario to be assigned to the model before it is validated and updated.
      */
-    public $scenario = Model::SCENARIO_DEFAULT;
+    public string $scenario = Model::SCENARIO_DEFAULT;
 
     /**
      * @inheritdoc
@@ -22,12 +22,12 @@ class ProfileUpdate extends \yii\rest\Action
     /**
      * Updates the information of the logged user.
      *
-     * @return \yii\db\ActiveRecordInterface
+     * @return ActiveRecordInterface
      * @throws ServerErrorHttpException if there is any error when updating the model
      */
-    public function run()
+    public function run(): ActiveRecordInterface
     {
-        /* @var $model \yii\db\ActiveRecordInterface */
+        /* @var $model ActiveRecordInterface */
         $model = Yii::$app->user->identity;
         $model->scenario = $this->scenario;
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');

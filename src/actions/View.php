@@ -2,6 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
+use roarsearch\yii2\roa\hal\ARContract;
 use Yii;
 
 class View extends Action
@@ -10,12 +11,12 @@ class View extends Action
      * @return ActiveDataProvider
      * @param mixed $id
      */
-    public function run($id)
+    public function run($id): ARContract
     {
-        /* @var $model \yii\db\ActiveRecordInterface */
-        $model = $this->findModel($id);
-        $request = Yii::$app->getRequest();
-        $this->checkAccess($model, $request->getQueryParams());
+        $this->checkAccess(
+            ($model = $this->findModel($id)),
+            Yii::$app->getRequest()->getQueryParams()
+        );
 
         return $model;
     }

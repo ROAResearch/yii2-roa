@@ -2,8 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use Yii;
-use yii\web\ServerErrorHttpException;
+use roarsearch\yii2\roa\hal\ARContract;
 
 /**
  * Restores a record using the `restoreDelete()` method. Meant to be used with
@@ -11,27 +10,18 @@ use yii\web\ServerErrorHttpException;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class Restore extends Action
+class Restore extends ProctRecordAction
 {
     /**
-     * Applies the `restore()` method to a record.
-     *
-     * @param mixed $id the identifier value.
+     * @inheritdoc
      */
-    public function run($id)
+    protected string $errorMessage = 'Restore failed for unknown reasons.';
+
+    /**
+     * @inheritdoc
+     */
+    protected function proct(ARContract $model, array $params): bool
     {
-        $this->checkAccess(
-            ($model = $this->findModel($id)),
-            Yii::$app->request->queryParams
-        );
-
-
-        if (false === $model->restore()) {
-            throw new ServerErrorHttpException(
-                'Failed to restore the object for unknown reason.'
-            );
-        }
-
-        return $model;
+        return false !== $model->restore();
     }
 }

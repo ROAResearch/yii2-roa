@@ -25,7 +25,7 @@ class Modular extends Composite
      * @var string unique id to grab the module from the application that will
      * parse the rules.
      */
-    public $moduleId;
+    public string $moduleId;
 
     /**
      * @inheritdoc
@@ -41,9 +41,10 @@ class Modular extends Composite
      */
     protected function createRules()
     {
-        if (empty($this->moduleId)) {
-            throw new InvalidConfigException('`moduleId` must be set.');
-        }
+        $this->moduleId ?: throw new InvalidConfigException(
+            $this::class . '::$moduleId must be set.'
+        );
+
         $module = Yii::$app->getModule($this->moduleId);
         if (!$module instanceof UrlRuleCreator) {
             throw new InvalidConfigException(

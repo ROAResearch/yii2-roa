@@ -21,37 +21,45 @@ abstract class Composite extends \yii\web\CompositeUrlRule
      * @var bool whether this rule must throw an `NotFoundHttpException` when
      * parse request fails.
      */
-    public $strict = true;
-
-    /**
-     * @var UrlNormalizer|null
-     */
-    public $normalizer = null;
+    public bool $strict = true;
 
     /**
      * @var string message used to create the `NotFoundHttpException` when
      * `$strict` equals `true` and no children rules could parse the request.
      */
-    public $notFoundMessage = 'Unknown route.';
+    public string $notFoundMessage = 'Unknown route.';
+
+    /**
+     * @var ?UrlNormalizer|array
+     */
+    protected ?UrlNormalizer $normalizer;
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function setNormalizer(?UrlNormalizer|array $normalizer): void
     {
-        if (is_array($this->normalizer)) {
-            $this->normalizer = Yii::createObject(array_merge(
+        $this->normalizer = is_array($normalizer)
+            ? Yii::createObject(array_merge(
                 ['class' => UrlNormalizer::class],
-                $this->normalizer
-            ));
-        }
-        if (!empty($this->normalizer)
-            && !$this->normalizer instanceof UrlNormalizer
+                $normalizer
+            ))
+            : $normalizer;
+    }
+
+    /**
+     * @param UrlManager $manager the URL manager
+     * @return ?UrlNormalizer
+     */
+    protected function getNormalizer(UrlManager $manager): ?UrlNormalizer
+    {
+        if ($this->normalizer === null
+            && $manager->normalizer instanceof UrlNormalizer
         ) {
-            throw new InvalidConfigException(
-                'Invalid config for `normalizer`.'
-            );
+            return $manager->normalizer;
         }
+
+        return $this->normalizer;
     }
 
     /**
@@ -68,9 +76,7 @@ abstract class Composite extends \yii\web\CompositeUrlRule
      */
     private function ensureRules()
     {
-        if (empty($this->rules)) {
-            $this->rules = $this->createRules();
-        }
+        $this->rules ??= $this->createRules();
     }
 
     /**
@@ -123,21 +129,6 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     protected function hasNormalizer($manager): bool
     {
         return null !== $this->getNormalizer($manager);
-    }
-
-    /**
-     * @param UrlManager $manager the URL manager
-     * @return ?UrlNormalizer
-     */
-    protected function getNormalizer(UrlManager $manager): ?UrlNormalizer
-    {
-        if ($this->normalizer === null
-            && $manager->normalizer instanceof UrlNormalizer
-        ) {
-            return $manager->normalizer;
-        }
-
-        return $this->normalizer;
     }
 
     /**

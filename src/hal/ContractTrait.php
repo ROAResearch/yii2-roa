@@ -3,6 +3,7 @@
 namespace roaresearch\yii2\roa\hal;
 
 use roaresearch\yii2\roa\behaviors\{Curies, Slug};
+use yii\base\Action;
 
 /**
  * Trait which gives the basic support for HAL contracts.
@@ -19,6 +20,13 @@ trait ContractTrait
             $this->getCuriesBehaviorId() => ['class' => Curies::class]
                 + $this->curiesBehaviorConfig(),
         ]);
+    }
+
+    public function checkAccess(
+        array $params = [],
+        ?Action $action = null
+    ): void {
+        $this->getSlugBehavior()->checkAccess($params, $action);
     }
 
     abstract protected function slugBehaviorConfig(): array;
