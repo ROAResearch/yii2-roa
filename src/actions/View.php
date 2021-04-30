@@ -8,7 +8,7 @@ use Yii;
 class View extends Action
 {
     /**
-     * @return ActiveDataProvider
+     * @return ARContract
      * @param mixed $id
      */
     public function run($id): ARContract

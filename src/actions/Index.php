@@ -34,7 +34,7 @@ class Index extends Action
     }
 
     /**
-     * @return DataProviderInterface|ActiveRecordInterface
+     * @return DataProviderInterface | ARContractSearch
      */
     public function run(): DataProviderInterface | ARContractSearch
     {

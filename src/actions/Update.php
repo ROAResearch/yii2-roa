@@ -30,7 +30,7 @@ class Update extends ProctRecordAction
      */
     protected function proct(ARContract $model, array $params): bool
     {
-        $model->scenario = $this->scenario;
+        $model->setScenario($this->scenario);
         $model->load(
             Yii::$app->request->getBodyParams() + $this->parseFileAttributes(),
             ''

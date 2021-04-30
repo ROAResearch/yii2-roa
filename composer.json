@@ -57,7 +57,10 @@
             "vendor/bin/phpcs"
         ],
         "run-tests": "@php vendor/bin/codecept run --steps",
-        "run-coverage": "@composer run-tests -- --coverage --coverage-xml"
+        "run-coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@composer run-tests -- --coverage --coverage-xml"
+        ]
     },
     "scripts-descriptions": {
         "yii": "shortcut for `php tests/_app/yii.php`",

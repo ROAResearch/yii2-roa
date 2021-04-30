@@ -21,15 +21,14 @@ class Create extends Action
 
     /**
      * Creates a new model.
-     * @return ActiveRecordInterface the model newly created
+     * @return ARContract the model newly created
      * @throws ServerErrorHttpException if there is any error when creating the model
      */
     public function run(): ARContract
     {
         $request = Yii::$app->getRequest();
-        $modelClass = $this->modelClass;
         /* @var $model ARContract */
-        $model = new $modelClass([
+        $model = new ($this->modelClass)([
             'scenario' => $this->scenario,
         ]);
         $model->load(

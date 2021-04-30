@@ -19,7 +19,7 @@ class ProfileView extends \yii\rest\Action
      *
      * @return IdentityInterface
      */
-    public function run(): IdentityInterface
+    public function run(): ?IdentityInterface
     {
         return Yii::$app->user->identity;
     }
