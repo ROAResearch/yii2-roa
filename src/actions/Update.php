@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use roarsearch\yii2\roa\hal\ARContract;
+use roaresearch\yii2\roa\hal\ARContract;
 use Yii;
 use yii\{base\Model, web\ServerErrorHttpException};
 

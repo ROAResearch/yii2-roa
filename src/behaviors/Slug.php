@@ -2,6 +2,7 @@
 
 namespace roaresearch\yii2\roa\behaviors;
 
+use roaresearch\yii2\roa\hal\ARContract;
 use yii\{
     base\Action,
     base\InvalidConfigException,
@@ -22,7 +23,7 @@ class Slug extends \yii\base\Behavior
     /**
      * @var ?string name of the parent relation of the `$owner`
      */
-    public ?string $parentSlugRelation;
+    public ?string $parentSlugRelation = null;
 
     /**
      * @var string name of the resource
@@ -49,7 +50,7 @@ class Slug extends \yii\base\Behavior
     /**
      * @var ?ARContract parent record.
      */
-    protected ?ARContract $parentSlug;
+    protected ?ARContract $parentSlug = null;
 
     /**
      * @var string url to resource
@@ -77,7 +78,8 @@ class Slug extends \yii\base\Behavior
     {
         if (null === $this->parentSlugRelation) {
             $this->resourceLink = $this->defaultResourceLink();
-        } elseif ($force
+        } elseif (
+            $force
             || $owner->isRelationPopulated($this->parentSlugRelation)
         ) {
             $this->populateSlugParent($owner);
@@ -116,7 +118,7 @@ class Slug extends \yii\base\Behavior
     public function getResourceRecordId(): string
     {
         $attributeValues = [];
-        foreach ($this->idAttribute as $attribute) {
+        foreach ($this->idAttributes as $attribute) {
             $attributeValues[] = $this->owner->$attribute;
         }
 

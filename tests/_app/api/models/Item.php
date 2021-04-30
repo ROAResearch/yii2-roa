@@ -24,18 +24,19 @@ class Item extends \app\models\Item implements ARContract
      */
     protected function slugBehaviorConfig(): Slug
     {
-        return new class(['owner' => $this]) extends Slug {
+        return new class (['owner' => $this]) extends Slug {
             public string $resourceName = 'item';
 
             public function checkAccess(
                 array $params = [],
                 ?Action $action = null
-            ) {
-                if (isset($params['item_id'])
-                    && $this->id != $params['item_id']
+            ): void {
+                if (
+                    isset($params['item_id'])
+                    && $this->owner->id != $params['item_id']
                 ) {
                     throw new NotFoundHttpException(
-                       'Item not associated to element.'
+                        'Item not associated to element.'
                     );
                 }
             }

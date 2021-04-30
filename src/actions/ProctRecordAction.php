@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use roarsearch\yii2\roa\hal\ARContract;
+use roaresearch\yii2\roa\hal\ARContract;
 use Yii;
 use yii\web\{HttpException, ServerErrorHttpException};
 
@@ -24,7 +24,7 @@ abstract class ProctRecordAction extends Action
      * @param mixed $id the identifier value.
      * @return ARContract the record after successful proct
      */
-    public function run($id): ARContract
+    public function run($id): ?ARContract
     {
         $this->checkAccess(
             ($model = $this->findModel($id)),
@@ -32,7 +32,7 @@ abstract class ProctRecordAction extends Action
         );
         $this->proct($model, $params) ?: throw $this->errorException();
 
-        return $model;
+        return $this->successResponse($model);
     }
 
     /**
@@ -49,5 +49,12 @@ abstract class ProctRecordAction extends Action
     {
         return new ServerErrorHttpException($this->errorMessage);
     }
-}
 
+    /**
+     * @param ARContract $model
+     */
+    protected function successResponse(ARContract $model)
+    {
+        return $model;
+    }
+}

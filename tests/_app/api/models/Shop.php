@@ -24,18 +24,19 @@ class Shop extends \app\models\Shop implements ARContract
      */
     protected function slugBehaviorConfig(): Slug
     {
-        return new class(['owner' => $this]) extends Slug {
+        return new class (['owner' => $this]) extends Slug {
             public string $resourceName = 'shop';
 
             public function checkAccess(
                 array $params = [],
                 ?Action $action = null
-            ) {
-                if (isset($params['shop_id'])
-                    && $this->id != $params['shop_id']
+            ): void {
+                if (
+                    isset($params['shop_id'])
+                    && $this->owner->id != $params['shop_id']
                 ) {
                     throw new NotFoundHttpException(
-                       'Shop not associated to element.'
+                        'Shop not associated to element.'
                     );
                 }
             }

@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\hal;
 
-use yii\web\ActiveRecordInterface;
+use yii\db\ActiveRecordInterface;
 
 interface ARContract extends ActiveRecordInterface, Contract
 {

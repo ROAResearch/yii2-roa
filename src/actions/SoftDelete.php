@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use roarsearch\yii2\roa\hal\ARContract;
+use roaresearch\yii2\roa\hal\ARContract;
 
 /**
  * Deletes a record using the `softDelete()` method. Meant to be used with
@@ -12,6 +12,8 @@ use roarsearch\yii2\roa\hal\ARContract;
  */
 class SoftDelete extends ProctRecordAction
 {
+    use DeleteResponseTrait;
+
     /**
      * @inheritdoc
      */

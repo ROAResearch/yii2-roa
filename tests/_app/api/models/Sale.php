@@ -14,7 +14,7 @@ class Sale extends \app\models\Sale implements ARContract
     /**
      * @inheritdoc
      */
-    protected $employeeClass = Employee::class;
+    protected string $employeeClass = Employee::class;
 
     /**
      * @inheritdoc

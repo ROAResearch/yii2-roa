@@ -50,7 +50,7 @@ class Resource extends \yii\rest\ActiveController
      * @var ?string class name for the model to be used on the search.
      * Must implement `roaresearch\yii2\roa\ResourceSearch`
      */
-    public ?string $searchClass;
+    public ?string $searchClass = null;
 
     /**
      * @var string name of the form which will hold the GET parameters to filter

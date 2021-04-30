@@ -36,10 +36,11 @@ class Index extends Action
     /**
      * @return DataProviderInterface|ActiveRecordInterface
      */
-    public function run(): DataProvideInterface | ARContractSearch
+    public function run(): DataProviderInterface | ARContractSearch
     {
+        /** @var ARContractSearch $searchModel */
         $searchModel = Instance::ensure(
-            ['class' => $this->searchModel],
+            ['class' => $this->searchClass],
             ARContractSearch::class
         );
         $dataProvider = $searchModel->search(
