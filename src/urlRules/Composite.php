@@ -5,6 +5,7 @@ namespace roaresearch\yii2\roa\urlRules;
 use Yii;
 use yii\{
     base\InvalidConfigException,
+    di\Instance,
     web\NotFoundHttpException,
     web\UrlManager,
     web\UrlNormalizer
@@ -30,21 +31,16 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     public string $notFoundMessage = 'Unknown route.';
 
     /**
-     * @var ?UrlNormalizer|array
+     * @var ?UrlNormalizer
      */
-    protected ?UrlNormalizer $normalizer;
+    protected ?UrlNormalizer $normalizer = null;
 
     /**
      * @inheritdoc
      */
-    public function setNormalizer(?UrlNormalizer|array $normalizer): void
+    public function setNormalizer(UrlNormalizer|array $normalizer): void
     {
-        $this->normalizer = is_array($normalizer)
-            ? Yii::createObject(array_merge(
-                ['class' => UrlNormalizer::class],
-                $normalizer
-            ))
-            : $normalizer;
+        $this->normalizer = Instance::ensure($normalizer, UrlNormalizer::class);
     }
 
     /**
@@ -53,10 +49,8 @@ abstract class Composite extends \yii\web\CompositeUrlRule
      */
     protected function getNormalizer(UrlManager $manager): ?UrlNormalizer
     {
-        if ($this->normalizer === null
-            && $manager->normalizer instanceof UrlNormalizer
-        ) {
-            return $manager->normalizer;
+        if (!$this->normalizer && $manager->normalizer) {
+            $this->setNormalizer($manager->normalizer);
         }
 
         return $this->normalizer;

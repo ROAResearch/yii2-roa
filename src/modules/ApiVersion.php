@@ -46,22 +46,22 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
     public string $urlRuleClass = ResourceUrlRule::class;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became stable
      */
-    public ?string $releaseDate;
+    public ?string $releaseDate = null;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became deprecated
      */
-    public ?string $deprecationDate;
+    public ?string $deprecationDate = null;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became obsolete
      */
-    public ?string $obsoleteDate;
+    public ?string $obsoleteDate = null;
 
     /**
      * @var string URL where the api documentation can be found.

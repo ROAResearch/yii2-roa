@@ -4,7 +4,7 @@ namespace roaresearch\yii2\roa\actions;
 
 use roaresearch\yii2\roa\hal\ARContractSearch;
 use Yii;
-use yii\{base\InvalidConfigException, data\DataProviderInterface};
+use yii\{base\InvalidConfigException, data\DataProviderInterface, di\Instance};
 
 /**
  * Action to retreive a filtered and sorted collection based on a `$searchClass`
@@ -38,7 +38,10 @@ class Index extends Action
      */
     public function run(): DataProvideInterface | ARContractSearch
     {
-        $searchModel = $this->buildSearchModel();
+        $searchModel = Instance::ensure(
+            ['class' => $this->searchModel],
+            ARContractSearch::class
+        );
         $dataProvider = $searchModel->search(
             Yii::$app->request->getQueryParams(),
             $this->formName
@@ -46,13 +49,5 @@ class Index extends Action
         $this->checkAccess($searchModel, Yii::$app->request->getQueryParams());
 
         return $dataProvider ?: $searchModel;
-    }
-
-    /**
-     * @return ARContractSearch the model used to create the data provider
-     */
-    protected function buildSearchModel(): ARContractSearch
-    {
-        return new {$this->searchClass}();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa;
 
-use yii\data\ActiveDataProvider;
+use yii\data\DataProviderInterface;
 
 interface ResourceSearch
 {
@@ -16,6 +16,6 @@ interface ResourceSearch
     public function search(
         array $params,
         ?string $formName = ''
-    ): ?ActiveDataProvider;
+    ): ?DataProviderInterface;
 
 }

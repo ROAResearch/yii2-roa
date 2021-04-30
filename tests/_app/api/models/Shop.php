@@ -2,13 +2,13 @@
 
 namespace app\api\models;
 
-use roaresearch\yii2\roa\hal\{Contract, ContractTrait};
-use yii\web\NotFoundHttpException;
+use roaresearch\yii2\roa\{behaviors\Slug, hal\ARContract, hal\ContractTrait};
+use yii\{base\Action, web\NotFoundHttpException};
 
 /**
  * ROA contract to handle shop records.
  */
-class Shop extends \app\models\Shop implements Contract
+class Shop extends \app\models\Shop implements ARContract
 {
     use ContractTrait {
         getLinks as getContractLinks;
@@ -17,16 +17,20 @@ class Shop extends \app\models\Shop implements Contract
     /**
      * @inheritdoc
      */
-    protected $employeeClass = Employee::class;
+    protected string $employeeClass = Employee::class;
 
     /**
      * @inheritdoc
      */
-    protected function slugBehaviorConfig(): array
+    protected function slugBehaviorConfig(): Slug
     {
-        return [
-            'resourceName' => 'shop',
-            'checkAccess' => function ($params) {
+        return new class(['owner' => $this]) extends Slug {
+            public string $resourceName = 'shop';
+
+            public function checkAccess(
+                array $params = [],
+                ?Action $action = null
+            ) {
                 if (isset($params['shop_id'])
                     && $this->id != $params['shop_id']
                 ) {
@@ -34,8 +38,8 @@ class Shop extends \app\models\Shop implements Contract
                        'Shop not associated to element.'
                     );
                 }
-            },
-        ];
+            }
+        };
     }
 
     /**

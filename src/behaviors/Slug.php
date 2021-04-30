@@ -188,6 +188,6 @@ class Slug extends \yii\base\Behavior
     public function checkAccess(array $params, ?Action $action = null): void
     {
         $this->ensureSlug($this->owner, true);
-        $this->parentSlug?->checkAccess($params $action);
+        $this->parentSlug?->checkAccess($params, $action);
     }
 }

@@ -8,8 +8,6 @@ use yii\{
     base\InvalidRouteException,
     data\ActiveDataProvider,
     db\ActiveQuery,
-    db\ActiveRecord,
-    db\ActiveRecordInterface,
     filters\VerbFilter,
     helpers\ArrayHelper,
     web\MethodNotAllowedHttpException,
@@ -64,16 +62,6 @@ class Resource extends \yii\rest\ActiveController
      * @var string[] $attribute => $param pairs to filter the queries.
      */
     public array $filterParams = [];
-
-    /**
-     * @var string scenario to be used when updating a record.
-     */
-    public string $updateScenario = ActiveRecord::SCENARIO_DEFAULT;
-
-    /**
-     * @var string scenario to be used when creating a new record.
-     */
-    public string $createScenario = ActiveRecord::SCENARIO_DEFAULT;
 
     /**
      * @var string[] array used in `actions\Create::fileAttributes`
@@ -177,7 +165,7 @@ class Resource extends \yii\rest\ActiveController
     /**
      * Finds the record based on the provided id or throws an exception.
      * @param int $id the unique identifier for the record.
-     * @return ActiveRecordInterface
+     * @return ARContract
      * @throws NotFoundHttpException if the record can't be found.
      */
     public function findModel($id): ARContract
@@ -214,9 +202,7 @@ class Resource extends \yii\rest\ActiveController
      */
     protected function baseQuery(): ActiveQuery
     {
-        $modelClass = $this->modelClass;
-
-        return $modelClass::find()
+        return $this->modelClass::find()
             ->andFilterWhere($this->filterCondition());
     }
 

@@ -19,7 +19,7 @@ class Modular extends Composite
      *
      * - {moduleId}: the unique module id associated to this rule.
      */
-    public $notFoundMessage = 'Unknown route for module `{moduleId}`.';
+    public string $notFoundMessage = 'Unknown route for module `{moduleId}`.';
 
     /**
      * @var string unique id to grab the module from the application that will

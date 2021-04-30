@@ -2,7 +2,7 @@
 
 namespace app\api\resources;
 
-use app\api\models\{Sale, SoftDeleteQuery};
+use app\api\models\Sale;
 use app\models\SoftDeleteQuery;
 use roaresearch\yii2\roa\controllers\RestoreResource;
 use yii\db\ActiveQuery;
@@ -15,7 +15,7 @@ class SaleRestoreResource extends RestoreResource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'sale.id';
+    public string $idAttribute = 'sale.id';
 
     /**
      * @inheritdoc
@@ -25,7 +25,7 @@ class SaleRestoreResource extends RestoreResource
     /**
      * @inheritdoc
      */
-    public $filterParams = ['employee_id', 'shop_id'];
+    public array $filterParams = ['employee_id', 'shop_id'];
 
     /**
      * @inheritdoc

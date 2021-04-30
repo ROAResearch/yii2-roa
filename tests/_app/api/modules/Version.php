@@ -21,30 +21,30 @@ use roaresearch\yii2\roa\{
 
 class Version extends ApiVersion
 {
-    public $releaseDate = '2020-06-15';
-    public $deprecationDate = '2025-01-01';
-    public $obsoleteDate = '2025-12-31';
+    public ?string $releaseDate = '2020-06-15';
+    public ?string $deprecationDate = '2025-01-01';
+    public ?string $obsoleteDate = '2025-12-31';
 
-    const ITEM_ROUTE = 'item';
-    const ITEM_RESTORE_ROUTE = 'item-restore';
+    public const ITEM_ROUTE = 'item';
+    public const ITEM_RESTORE_ROUTE = 'item-restore';
 
-    const SHOP_ROUTE = 'shop';
-    const SHOP_RESTORE_ROUTE = 'shop-restore';
+    public const SHOP_ROUTE = 'shop';
+    public const SHOP_RESTORE_ROUTE = 'shop-restore';
 
-    const EMPLOYEE_ROUTE = self::SHOP_ROUTE . '/<shop_id:\d+>/employee';
-    const EMPLOYEE_RESTORE_ROUTE = self::SHOP_ROUTE
+    public const EMPLOYEE_ROUTE = self::SHOP_ROUTE . '/<shop_id:\d+>/employee';
+    public const EMPLOYEE_RESTORE_ROUTE = self::SHOP_ROUTE
         . '/<shop_id:\d+>/employee-restore';
 
-    const SALE_ROUTE = self::EMPLOYEE_ROUTE . '/<employee_id:\d+>/sale';
-    const SALE_RESTORE_ROUTE = self::EMPLOYEE_ROUTE
+    public const SALE_ROUTE = self::EMPLOYEE_ROUTE . '/<employee_id:\d+>/sale';
+    public const SALE_RESTORE_ROUTE = self::EMPLOYEE_ROUTE
         . '/<employee_id:\d+>/sale-recovery';
 
-    const SALE_ITEM_ROUTE = self::SALE_ROUTE . '/<sale_id:\d+>/item';
+    public const SALE_ITEM_ROUTE = self::SALE_ROUTE . '/<sale_id:\d+>/item';
 
     /**
      * @inheritdoc
      */
-    public $resources = [
+    public array $resources = [
         'profile' => [
             'class' => ProfileResource::class,
             'urlRule' => ['class' => ProfileUrlRule::class],
@@ -73,5 +73,5 @@ class Version extends ApiVersion
         self::SALE_ITEM_ROUTE => ['class' => SaleItemResource::class],
     ];
 
-    public $apidoc = 'http://mockapi.com/v1';
+    public ?string $apidoc = 'http://mockapi.com/v1';
 }

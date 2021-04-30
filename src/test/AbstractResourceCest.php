@@ -57,7 +57,7 @@ abstract class AbstractResourceCest
         if (isset($example['url'])) {
             return $example['url'];
         }
-        $params = $example['urlParams'] ?? : [];
+        $params = $example['urlParams'] ?? [];
         $params[0] = 'test/action';
 
         return $this->urlManager->createUrl($params);
