@@ -259,7 +259,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
 
             if (is_array($controller)) {
                 $controllerRoute = isset($controller['controllerRoute'])
-                    ? ArrayHelper::remove($controller, 'controllerRoute'),
+                    ? ArrayHelper::remove($controller, 'controllerRoute')
                     : $this->buildControllerRoute($route);
 
                 $controller['class'] = $controller['class']
