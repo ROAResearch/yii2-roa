@@ -295,7 +295,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
             $rules[] = Yii::createObject([
                 'class' => \yii\web\UrlRule::class,
                 'pattern' => $this->uniqueId . '/<route:*+>',
-                'route' => $this->uniqueId . '/index/gone',
+                'route' => $this->module->uniqueId . '/index/gone',
             ]);
 
             return $rules;
