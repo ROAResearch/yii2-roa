@@ -237,6 +237,57 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
     /**
      * @inheritdoc
      */
+    public function initCreator(CompositeUrlRule $urlRule): void
+    {
+        if ($this->stability == self::STABILITY_OBSOLETE) {
+            return;
+        }
+
+        $resources = []; // normalized resources
+        foreach ($this->resources as $route => $controller) {
+            if (is_string($controller)) {
+                $route = $controller;
+                $controllerRoute = $this->buildControllerRoute($route);
+
+                $this->controllerMap[$controllerRoute] = $resources[$route] = [
+                    'class' => $this->buildControllerClass($controllerRoute),
+                ];
+                $resources[$route]['controllerRoute'] = $controllerRoute;
+
+                continue;
+            }
+
+            if (is_array($controller)) {
+                $controllerRoute = isset($controller['controllerRoute'])
+                    ? ArrayHelper::remove($controller, 'controllerRoute'),
+                    : $this->buildControllerRoute($route);
+
+                $controller['class'] = $controller['class']
+                    ?? $this->buildControllerClass($controllerRoute);
+
+                $resources[$route] = $controller;
+                $resources[$route]['controllerRoute'] = $controllerRoute;
+
+                ArrayHelper::remove($controller, 'urlRule');
+                $this->controllerMap[$controllerRoute] = $controller;
+
+                continue;
+            }
+
+            // case its an object
+            $resources[$route] = [
+                'controllerRoute' => $cR = $this->buildControllerRoute($route),
+            ];
+
+            $this->controllerMap[$cR] = $controller;
+        }
+
+        $this->resources = $resources; // homologate resources
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function createUrlRules(CompositeUrlRule $urlRule): array
     {
         $rules = $this->defaultUrlRules();
@@ -250,29 +301,17 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
             return $rules;
         }
 
-        foreach ($this->resources as $route => $controller) {
-            $route = is_int($route) ? $controller : $route;
-            $controllerRoute = $this->buildControllerRoute($route);
-            if (is_string($controller)) {
-                $controller = [
-                    'class' => $this->buildControllerClass($controllerRoute),
-                ];
-            } elseif (is_array($controller) && empty($controller['class'])) {
-                $controller['class'] = $this->buildControllerClass(
-                    $controllerRoute
-                );
-            }
+        foreach ($this->resources as $route => $c) {
             $rules[] = Yii::createObject(array_merge(
                 [
                     'class' => $this->urlRuleClass,
                     'controller' => [
-                        $route => "{$this->uniqueId}/$controllerRoute",
+                        $route => "{$this->uniqueId}/{$c['controllerRoute']}"
                     ],
                     'prefix' => $this->uniqueId,
                 ],
-                ArrayHelper::remove($controller, 'urlRule', [])
+                ArrayHelper::remove($c, 'urlRule', [])
             ));
-            $this->controllerMap[$controllerRoute] = $controller;
         }
 
         return $rules;
