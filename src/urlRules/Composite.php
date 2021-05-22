@@ -38,7 +38,7 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     /**
      * @inheritdoc
      */
-    public function setNormalizer(UrlNormalizer|array $normalizer): void
+    public function setNormalizer(UrlNormalizer | array $normalizer): void
     {
         $this->normalizer = Instance::ensure($normalizer, UrlNormalizer::class);
     }
@@ -68,9 +68,9 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     /**
      * Ensures that `$rules` property is set
      */
-    private function ensureRules()
+    protected function ensureRules()
     {
-        $this->rules ??= $this->createRules();
+        $this->rules = $this->rules ?: $this->createRules();
     }
 
     /**
@@ -82,6 +82,7 @@ abstract class Composite extends \yii\web\CompositeUrlRule
         if (!$this->isApplicable($request->pathInfo)) {
             return false;
         }
+
         $normalized = false;
         if ($this->hasNormalizer($manager)) {
             $request->pathInfo = $this->getNormalizer($manager)
@@ -91,8 +92,10 @@ abstract class Composite extends \yii\web\CompositeUrlRule
                     $normalized
                 );
         }
+
         $this->ensureRules();
         $result = parent::parseRequest($manager, $request);
+
         if ($result === false && $this->strict === true) {
             throw $this->createNotFoundException();
         }

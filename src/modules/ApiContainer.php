@@ -202,18 +202,26 @@ class ApiContainer extends Module implements UrlRuleCreator, BootstrapInterface
     /**
      * @inheritdoc
      */
-    public function createUrlRules(CompositeUrlRule $urlRule): array
+    public function initCreator(CompositeUrlRule $urlRule): void
     {
         // change the error handler and identityClass
         Yii::$app->errorHandler->errorAction = $this->errorAction;
         Yii::$app->user->identityClass = $this->identityClass;
 
-        $rules = $this->defaultUrlRules();
         $auth = $this->getBehavior('authenticator');
-
         foreach ($this->versions as $route => $config) {
             $auth->except[] = $route . '/index/*';
             $this->setModule($route, $config);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createUrlRules(CompositeUrlRule $urlRule): array
+    {
+        $rules = $this->defaultUrlRules();
+        foreach ($this->versions as $route => $config) {
             $rules[] = Yii::createObject([
                 'class' => $this->versionUrlRuleClass,
                 'moduleId' => "{$this->uniqueId}/$route",
