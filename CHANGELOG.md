@@ -1,6 +1,11 @@
 Yii2 ROA Library
 ================
 
+2.0.2 June 4, 2021
+------------------
+
+- [Bug] Fix `ProfileResource::$updateScenario` being ignored
+
 2.0.1 October 28, 2020
 ----------------------
 
