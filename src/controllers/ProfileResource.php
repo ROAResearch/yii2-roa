@@ -3,10 +3,15 @@
 namespace roaresearch\yii2\roa\controllers;
 
 use roaresearch\yii2\roa\actions\{ProfileUpdate, ProfileView};
-use yii\{filters\VerbFilter, rest\OptionsAction};
+use yii\{base\Model, filters\VerbFilter, rest\OptionsAction};
 
 class ProfileResource extends \yii\rest\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public $updateScenario = Model::SCENARIO_DEFAULT;
+
     /**
      * @inheritdoc
      */
