@@ -34,6 +34,13 @@ class Modular extends Composite
 
     /**
      * @inheritdoc
+     */    
+    public function init()
+    {
+    }
+
+    /**
+     * @inheritdoc
      */
     protected function isApplicable(string $route): bool
     {
