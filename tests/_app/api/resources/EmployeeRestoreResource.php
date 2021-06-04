@@ -15,7 +15,7 @@ class EmployeeRestoreResource extends RestoreResource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'e.id';
+    public string $idAttribute = 'e.id';
 
     /**
      * @inheritdoc
@@ -25,7 +25,7 @@ class EmployeeRestoreResource extends RestoreResource
     /**
      * @inheritdoc
      */
-    public $filterParams = ['shop_id'];
+    public array $filterParams = ['shop_id'];
 
     /**
      * @inheritdoc

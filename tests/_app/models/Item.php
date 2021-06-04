@@ -20,7 +20,7 @@ class Item extends \yii\db\ActiveRecord
      * @var string full class name of the model used in the relation
      * `getSale()`.
      */
-    protected $saleItemClass = SaleItems::class;
+    protected string $saleItemClass = SaleItems::class;
 
     /**
      * @inheritdoc

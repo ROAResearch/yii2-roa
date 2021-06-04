@@ -26,7 +26,7 @@ class SaleResource extends \roaresearch\yii2\roa\controllers\Resource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'sale.id';
+    public string $idAttribute = 'sale.id';
 
     /**
      * @inheritdoc
@@ -36,7 +36,7 @@ class SaleResource extends \roaresearch\yii2\roa\controllers\Resource
     /**
      * @inheritdoc
      */
-    public $searchClass = SaleSearch::class;
+    public ?string $searchClass = SaleSearch::class;
 
     /**
      * @inheritdoc

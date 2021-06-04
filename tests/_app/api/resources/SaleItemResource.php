@@ -14,7 +14,7 @@ class SaleItemResource extends \roaresearch\yii2\roa\controllers\Resource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'sale_item.item_id';
+    public string $idAttribute = 'sale_item.item_id';
 
     /**
      * @inheritdoc
@@ -24,7 +24,12 @@ class SaleItemResource extends \roaresearch\yii2\roa\controllers\Resource
     /**
      * @inheritdoc
      */
-    public $filterParams = ['sale_id', 'employee_id', 'shop_id', 'item_id'];
+    public array $filterParams = [
+        'sale_id',
+        'employee_id',
+        'shop_id',
+        'item_id',
+    ];
 
     /**
      * @inheritdoc

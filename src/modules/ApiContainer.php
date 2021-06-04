@@ -31,17 +31,17 @@ class ApiContainer extends Module implements UrlRuleCreator, BootstrapInterface
     /**
      * @var string
      */
-    public $identityClass;
+    public string $identityClass;
 
     /**
      * @var string
      */
-    public $versionUrlRuleClass = ModularUrlRule::class;
+    public string $versionUrlRuleClass = ModularUrlRule::class;
 
     /**
      * @var string
      */
-    public $containerUrlRuleClass = ModularUrlRule::class;
+    public string $containerUrlRuleClass = ModularUrlRule::class;
 
     /**
      * @inheritdoc
@@ -56,22 +56,22 @@ class ApiContainer extends Module implements UrlRuleCreator, BootstrapInterface
     /**
      * @var array
      */
-    public $versions = [];
+    public array $versions = [];
 
     /**
      * @var string
      */
-    public $errorAction;
+    public string $errorAction;
 
     /**
      * @var string the module id for the oauth2 server module.
      */
-    public $oauth2ModuleId = 'oauth2';
+    public string $oauth2ModuleId = 'oauth2';
 
     /**
      * @var array default OAuth2Module configuration.
      */
-    private $oauth2Module = [
+    private array $oauth2Module = [
         'class' => OAuth2Module::class,
         'tokenParamName' => 'accessToken',
         'tokenAccessLifetime' => 3600 * 24,
@@ -188,7 +188,7 @@ class ApiContainer extends Module implements UrlRuleCreator, BootstrapInterface
     /**
      * @return \yii\web\UrlRuleInterface[]
      */
-    protected function defaultUrlRules()
+    protected function defaultUrlRules(): array
     {
         return [
             Yii::createObject([
@@ -202,18 +202,26 @@ class ApiContainer extends Module implements UrlRuleCreator, BootstrapInterface
     /**
      * @inheritdoc
      */
-    public function createUrlRules(CompositeUrlRule $urlRule): array
+    public function initCreator(CompositeUrlRule $urlRule): void
     {
         // change the error handler and identityClass
         Yii::$app->errorHandler->errorAction = $this->errorAction;
         Yii::$app->user->identityClass = $this->identityClass;
 
-        $rules = $this->defaultUrlRules();
         $auth = $this->getBehavior('authenticator');
-
         foreach ($this->versions as $route => $config) {
             $auth->except[] = $route . '/index/*';
             $this->setModule($route, $config);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createUrlRules(CompositeUrlRule $urlRule): array
+    {
+        $rules = $this->defaultUrlRules();
+        foreach ($this->versions as $route => $config) {
             $rules[] = Yii::createObject([
                 'class' => $this->versionUrlRuleClass,
                 'moduleId' => "{$this->uniqueId}/$route",

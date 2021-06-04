@@ -5,7 +5,7 @@ namespace app\models;
 use OAuth2\Storage\UserCredentialsInterface;
 use roaresearch\yii2\oauth2server\models\OauthAccessTokens as AccessToken;
 use Yii;
-use yii\web\IdentityInterface;
+use yii\{db\ActiveQuery, web\IdentityInterface};
 
 class User extends \yii\db\ActiveRecord implements
     UserCredentialsInterface,
@@ -177,15 +177,17 @@ class User extends \yii\db\ActiveRecord implements
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getAccessTokens()
+    public function getAccessTokens(): ActiveQuery
     {
         return $this->hasMany(AccessToken::class, ['user_id' => 'id'])
             ->andOnCondition(['client_id' => 'testclient']);
     }
 
-
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

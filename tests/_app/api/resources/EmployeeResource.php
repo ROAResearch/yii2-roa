@@ -29,7 +29,7 @@ class EmployeeResource extends Resource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'e.id';
+    public string $idAttribute = 'e.id';
 
     /**
      * @inheritdoc
@@ -39,12 +39,12 @@ class EmployeeResource extends Resource
     /**
      * @inheritdoc
      */
-    public $searchClass = EmployeeSearch::class;
+    public ?string $searchClass = EmployeeSearch::class;
 
     /**
      * @inheritdoc
      */
-    public $filterParams = ['shop_id'];
+    public array $filterParams = ['shop_id'];
 
     /**
      * @inheritdoc

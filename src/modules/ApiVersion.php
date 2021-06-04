@@ -30,50 +30,50 @@ use yii\{
  */
 class ApiVersion extends \yii\base\Module implements UrlRuleCreator
 {
-    const STABILITY_DEVELOPMENT = 'development';
-    const STABILITY_STABLE = 'stable';
-    const STABILITY_DEPRECATED = 'deprecated';
-    const STABILITY_OBSOLETE = 'obsolete';
+    public const STABILITY_DEVELOPMENT = 'development';
+    public const STABILITY_STABLE = 'stable';
+    public const STABILITY_DEPRECATED = 'deprecated';
+    public const STABILITY_OBSOLETE = 'obsolete';
 
     /**
      * @var string subfix used to create the default classes
      */
-    public $controllerSubfix = 'Resource';
+    public string $controllerSubfix = 'Resource';
 
     /**
      * @var string full class name which will be used as default for routing.
      */
-    public $urlRuleClass = ResourceUrlRule::class;
+    public string $urlRuleClass = ResourceUrlRule::class;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became stable
      */
-    public $releaseDate;
+    public ?string $releaseDate = null;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became deprecated
      */
-    public $deprecationDate;
+    public ?string $deprecationDate = null;
 
     /**
-     * @var string date in Y-m-d format for the date at which this version
+     * @var ?string date in Y-m-d format for the date at which this version
      * became obsolete
      */
-    public $obsoleteDate;
+    public ?string $obsoleteDate = null;
 
     /**
      * @var string URL where the api documentation can be found.
      */
-    public $apidoc = null;
+    public ?string $apidoc = null;
 
     /**
      * @var array|ResponseFormatterInterface[] response formatters which will
      * be attached to `Yii::$app->response->formatters`. By default just enable
      * HAL responses.
      */
-    public $responseFormatters = [
+    public array $responseFormatters = [
         Response::FORMAT_JSON => [
             'class' => JsonResponseFormatter::class,
             'contentType' => JsonResponseFormatter::CONTENT_TYPE_HAL_JSON,
@@ -87,7 +87,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
     /**
      * @var string the stability level
      */
-    protected $stability = self::STABILITY_DEVELOPMENT;
+    protected string $stability = self::STABILITY_DEVELOPMENT;
 
     /**
      * @return string the stability defined for this version.
@@ -130,7 +130,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
      * ]
      * ```
      */
-    public $resources = [];
+    public array $resources = [];
 
     /**
      * @return string[] gets the list of routes allowed for this api version.
@@ -222,7 +222,7 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
     /**
      * @return array list of configured urlrules by default
      */
-    protected function defaultUrlRules()
+    protected function defaultUrlRules(): array
     {
         return [
             Yii::createObject([
@@ -237,42 +237,81 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
     /**
      * @inheritdoc
      */
+    public function initCreator(CompositeUrlRule $urlRule): void
+    {
+        if ($this->stability == self::STABILITY_OBSOLETE) {
+            return;
+        }
+
+        $resources = []; // normalized resources
+        foreach ($this->resources as $route => $controller) {
+            if (is_string($controller)) {
+                $route = $controller;
+                $controllerRoute = $this->buildControllerRoute($route);
+
+                $this->controllerMap[$controllerRoute] = $resources[$route] = [
+                    'class' => $this->buildControllerClass($controllerRoute),
+                ];
+                $resources[$route]['controllerRoute'] = $controllerRoute;
+
+                continue;
+            }
+
+            if (is_array($controller)) {
+                $controllerRoute = isset($controller['controllerRoute'])
+                    ? ArrayHelper::remove($controller, 'controllerRoute')
+                    : $this->buildControllerRoute($route);
+
+                $controller['class'] = $controller['class']
+                    ?? $this->buildControllerClass($controllerRoute);
+
+                $resources[$route] = $controller;
+                $resources[$route]['controllerRoute'] = $controllerRoute;
+
+                ArrayHelper::remove($controller, 'urlRule');
+                $this->controllerMap[$controllerRoute] = $controller;
+
+                continue;
+            }
+
+            // case its an object
+            $resources[$route] = [
+                'controllerRoute' => $cR = $this->buildControllerRoute($route),
+            ];
+
+            $this->controllerMap[$cR] = $controller;
+        }
+
+        $this->resources = $resources; // homologate resources
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function createUrlRules(CompositeUrlRule $urlRule): array
     {
         $rules = $this->defaultUrlRules();
         if ($this->stability == self::STABILITY_OBSOLETE) {
             $rules[] = Yii::createObject([
                 'class' => \yii\web\UrlRule::class,
-                'pattern' => $this->uniqueId . '/<route:*+>',
-                'route' => $this->uniqueId . '/index/gone',
+                'pattern' => $this->uniqueId . '/<route:.+>',
+                'route' => $this->module->uniqueId . '/index/gone',
             ]);
 
             return $rules;
         }
 
-        foreach ($this->resources as $route => $controller) {
-            $route = is_int($route) ? $controller : $route;
-            $controllerRoute = $this->buildControllerRoute($route);
-            if (is_string($controller)) {
-                $controller = [
-                    'class' => $this->buildControllerClass($controllerRoute),
-                ];
-            } elseif (is_array($controller) && empty($controller['class'])) {
-                $controller['class'] = $this->buildControllerClass(
-                    $controllerRoute
-                );
-            }
+        foreach ($this->resources as $route => $c) {
             $rules[] = Yii::createObject(array_merge(
                 [
                     'class' => $this->urlRuleClass,
                     'controller' => [
-                        $route => "{$this->uniqueId}/$controllerRoute",
+                        $route => "{$this->uniqueId}/{$c['controllerRoute']}"
                     ],
                     'prefix' => $this->uniqueId,
                 ],
-                ArrayHelper::remove($controller, 'urlRule', [])
+                ArrayHelper::remove($c, 'urlRule', [])
             ));
-            $this->controllerMap[$controllerRoute] = $controller;
         }
 
         return $rules;
@@ -328,11 +367,10 @@ class ApiVersion extends \yii\base\Module implements UrlRuleCreator
         if ($date === null) {
             return null;
         }
-        if (false === ($dt = DateTime::createFromFormat('Y-m-d', $date))) {
-            throw new InvalidConfigException(
+        $dt = DateTime::createFromFormat('Y-m-d', $date)
+            ?: throw new InvalidConfigException(
                 'Dates must use the "Y-m-d" format.'
             );
-        }
 
         return $dt->getTimestamp();
     }

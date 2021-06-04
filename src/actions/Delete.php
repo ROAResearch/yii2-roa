@@ -2,33 +2,27 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use Yii;
-use yii\web\ServerErrorHttpException;
+use roaresearch\yii2\roa\hal\ARContract;
 
 /**
  * Deletes a record from the database.
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class Delete extends Action
+class Delete extends ProctRecordAction
 {
-    /**
-     * Applies the `delete()` method to a record.
-     *
-     * @param mixed $id the identifier value.
-     */
-    public function run($id)
-    {
-        $this->checkAccess(
-            ($model = $this->findModel($id)),
-            Yii::$app->request->getQueryParams()
-        );
+    use DeleteResponseTrait;
 
-        if (false === $model->delete()) {
-            throw new ServerErrorHttpException(
-                'Failed to delete the object for unknown reason.'
-            );
-        }
-        Yii::$app->getResponse()->setStatusCode(204);
+    /**
+     * @inheritdoc
+     */
+    protected string $errorMessage = 'Delete failed for unknown reasons.';
+
+    /**
+     * @inheritdoc
+     */
+    protected function proct(ARContract $model, array $params): bool
+    {
+        return false !== $model->delete();
     }
 }

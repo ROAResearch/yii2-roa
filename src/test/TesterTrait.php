@@ -7,21 +7,20 @@ trait TesterTrait
     /**
      * @var string[] pairs of user_name => oauth2_token for oauth2 auth.
      */
-    protected static $tokens = [];
+    protected static array $tokens = [];
 
     /**
      * @var string identificator for the auth/logged user.
      */
-    protected $loggedUsername;
+    protected string $loggedUsername;
 
     /**
      * Saves a token and user by an unique name.
      *
      * @param string $tokenName unique name to index the tokens and models
      * @param string $token oauth2 authorization token
-     * @param UserIdentity $user
      */
-    public function storeToken($tokenName, $token)
+    public function storeToken(string $tokenName, string $token)
     {
         static::$tokens[$tokenName] = $token;
     }
@@ -31,7 +30,7 @@ trait TesterTrait
      *
      * @param string $tokenName
      */
-    public function amAuthByToken($tokenName)
+    public function amAuthByToken(string $tokenName)
     {
         $this->amBearerAuthenticated(static::$tokens[$tokenName]);
     }
@@ -51,7 +50,7 @@ trait TesterTrait
      * Checks over the HTTP content type header value.
      */
     public function seeContentTypeHttpHeader(
-        $contentType = Tester::HAL_JSON_CONTENT_TYPE
+        string $contentType = Tester::HAL_JSON_CONTENT_TYPE
     ) {
         $this->seeHttpHeader('Content-Type', $contentType);
     }

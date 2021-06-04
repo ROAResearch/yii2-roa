@@ -19,13 +19,25 @@ class Modular extends Composite
      *
      * - {moduleId}: the unique module id associated to this rule.
      */
-    public $notFoundMessage = 'Unknown route for module `{moduleId}`.';
+    public string $notFoundMessage = 'Unknown route for module `{moduleId}`.';
 
     /**
      * @var string unique id to grab the module from the application that will
      * parse the rules.
      */
-    public $moduleId;
+    public string $moduleId;
+
+    /**
+     * @var UrlRuleCreator
+     */
+    protected UrlRuleCreator $module;
+
+    /**
+     * @inheritdoc
+     */    
+    public function init()
+    {
+    }
 
     /**
      * @inheritdoc
@@ -41,18 +53,7 @@ class Modular extends Composite
      */
     protected function createRules()
     {
-        if (empty($this->moduleId)) {
-            throw new InvalidConfigException('`moduleId` must be set.');
-        }
-        $module = Yii::$app->getModule($this->moduleId);
-        if (!$module instanceof UrlRuleCreator) {
-            throw new InvalidConfigException(
-                "Module `{$this->moduleId}` must implement "
-                    . UrlRuleCreator::class
-            );
-        }
-
-        return $module->createUrlRules($this);
+        return $this->module->createUrlRules($this);
     }
 
     /**
@@ -63,5 +64,13 @@ class Modular extends Composite
         return new NotFoundHttpException(
             strtr($this->notFoundMessage, ['{moduleId}' => $this->moduleId])
         );
+    }
+
+    protected function ensureRules()
+    {
+        $this->module = Yii::$app->getModule($this->moduleId);
+        $this->module->initCreator($this);
+
+        parent::ensureRules();
     }
 }

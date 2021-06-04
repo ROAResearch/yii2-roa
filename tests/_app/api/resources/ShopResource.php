@@ -31,7 +31,7 @@ class ShopResource extends \roaresearch\yii2\roa\controllers\Resource
     /**
      * @inheritdoc
      */
-    public $searchClass = ShopSearch::class;
+    public ?string $searchClass = ShopSearch::class;
 
     /**
      * @inheritdoc

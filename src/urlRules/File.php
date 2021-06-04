@@ -27,7 +27,7 @@ class File extends Resource
     /**
      * @var string[] list of valid extensions that this rule can handle.
      */
-    public $ext = ['png', 'jpg'];
+    public array $ext = ['png', 'jpg'];
 
     /**
      * @inheritdoc

@@ -3,6 +3,7 @@
 namespace roaresearch\yii2\roa\actions;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 class ProfileView extends \yii\rest\Action
 {
@@ -16,9 +17,9 @@ class ProfileView extends \yii\rest\Action
     /**
      * Shows the information of the logged user.
      *
-     * @return yii\web\IdentityInterface
+     * @return IdentityInterface
      */
-    public function run()
+    public function run(): ?IdentityInterface
     {
         return Yii::$app->user->identity;
     }

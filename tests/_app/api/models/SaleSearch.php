@@ -2,15 +2,15 @@
 
 namespace app\api\models;
 
-use yii\data\ActiveDataProvider;
-use yii\web\NotFoundHttpException;
+use roaresearch\yii2\roa\hal\ARContractSearch;
+use yii\{data\ActiveDataProvider, web\NotFoundHttpException};
 
 /**
  * Contract to filter and sort collections of `Sale` records.
  *
  * @author Carlos (neverabe) Llamosas <carlos@invernaderolabs.com>
  */
-class SaleSearch extends Sale implements \roaresearch\yii2\roa\ResourceSearch
+class SaleSearch extends Sale implements ARContractSearch
 {
     /**
      * @inhertidoc
@@ -21,6 +21,7 @@ class SaleSearch extends Sale implements \roaresearch\yii2\roa\ResourceSearch
             [['employee_id'], 'integer'],
         ];
     }
+
     /**
      * @inhertidoc
      */

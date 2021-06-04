@@ -1,16 +1,11 @@
-
 # faster builds on new travis setup not using sudo
-sudo: false
-
 language: php
 
 services:
   - mysql
 
 php:
-  - 7.1
-  - 7.2
-  - 7.3
+  - 8.0
   - nightly
 
 matrix:
@@ -32,15 +27,3 @@ before_script:
 script:
   - composer deploy-tests
   - composer run-tests
-
-
-script:
-  - composer deploy-tests
-  - composer run-tests
-
-after_script:
-  - |
-    if [ $TRAVIS_PHP_VERSION = '7.1' ]; then
-      travis_retry wget https://scrutinizer-ci.com/ocular.phar
-      php ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml
-    fi

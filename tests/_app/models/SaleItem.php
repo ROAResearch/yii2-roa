@@ -15,13 +15,13 @@ class SaleItem extends \yii\db\ActiveRecord
      * @var string full class name of the model used in the relation
      * `getSale()`.
      */
-    protected $saleClass = Sale::class;
+    protected string $saleClass = Sale::class;
 
     /**
      * @var string full class name of the model used in the relation
      * `getItem()`.
      */
-    protected $itemClass = Item::class;
+    protected string $itemClass = Item::class;
 
     /**
      * @inheritdoc

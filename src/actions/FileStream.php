@@ -3,7 +3,6 @@
 namespace roaresearch\yii2\roa\actions;
 
 use roaresearch\yii2\roa\FileRecord;
-
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -45,7 +44,7 @@ class FileStream extends Action
     {
         $this->checkAccess(
             ($model = $this->findModel($id)),
-            Yii::$app->request->queryParams
+            Yii::$app->request->getQueryParams()
         );
 
         return Yii::$app->response->sendFile(

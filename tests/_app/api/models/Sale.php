@@ -2,19 +2,19 @@
 
 namespace app\api\models;
 
-use roaresearch\yii2\roa\hal\{Contract, ContractTrait};
+use roaresearch\yii2\roa\hal\{ARContract, ContractTrait};
 
 /**
  * ROA contract to handle shop sale records.
  */
-class Sale extends \app\models\Sale implements Contract
+class Sale extends \app\models\Sale implements ARContract
 {
     use ContractTrait;
 
     /**
      * @inheritdoc
      */
-    protected $employeeClass = Employee::class;
+    protected string $employeeClass = Employee::class;
 
     /**
      * @inheritdoc
