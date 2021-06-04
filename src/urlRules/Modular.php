@@ -28,6 +28,11 @@ class Modular extends Composite
     public $moduleId;
 
     /**
+     * @var UrlRuleCreator
+     */
+    protected $module;
+
+    /**
      * @inheritdoc
      */
     protected function isApplicable(string $route): bool
@@ -38,21 +43,11 @@ class Modular extends Composite
 
     /**
      * @inheritdoc
+
      */
     protected function createRules()
     {
-        if (empty($this->moduleId)) {
-            throw new InvalidConfigException('`moduleId` must be set.');
-        }
-        $module = Yii::$app->getModule($this->moduleId);
-        if (!$module instanceof UrlRuleCreator) {
-            throw new InvalidConfigException(
-                "Module `{$this->moduleId}` must implement "
-                    . UrlRuleCreator::class
-            );
-        }
-
-        return $module->createUrlRules($this);
+        return $this->module->createUrlRules($this);
     }
 
     /**
@@ -63,5 +58,22 @@ class Modular extends Composite
         return new NotFoundHttpException(
             strtr($this->notFoundMessage, ['{moduleId}' => $this->moduleId])
         );
+    }
+
+    protected function ensureRules()
+    {
+        if (empty($this->moduleId)) {
+            throw new InvalidConfigException('`moduleId` must be set.');
+        }
+        $this->module = Yii::$app->getModule($this->moduleId);
+        if (!$this->module instanceof UrlRuleCreator) {
+            throw new InvalidConfigException(
+                "Module `{$this->moduleId}` must implement "
+                    . UrlRuleCreator::class
+            );
+        }
+        $this->module->initCreator($this);
+
+        parent::ensureRules();
     }
 }
