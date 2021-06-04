@@ -43,7 +43,10 @@ class ProfileResource extends \yii\rest\Controller
     {
         return [
             'view' => ['class' => ProfileView::class],
-            'update' => ['class' => ProfileUpdate::class],
+            'update' => [
+                'class' => ProfileUpdate::class,
+                'scenario' => $this->updateScenario,
+            ],
             'options' => ['class' => OptionsAction::class],
         ];
     }
