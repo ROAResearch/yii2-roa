@@ -66,11 +66,9 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     /**
      * Ensures that `$rules` property is set
      */
-    private function ensureRules()
+    protected function ensureRules()
     {
-        if (empty($this->rules)) {
-            $this->rules = $this->createRules();
-        }
+        $this->rules = $this->rules ?: $this->createRules();
     }
 
     /**

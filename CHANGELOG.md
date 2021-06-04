@@ -5,6 +5,8 @@ Yii2 ROA Library
 ------------------
 
 - [Bug] Fix `ProfileResource::$updateScenario` being ignored
+- [Bug] Fix issue with cached url rules (Faryshta)
+
 
 2.0.1 October 28, 2020
 ----------------------
