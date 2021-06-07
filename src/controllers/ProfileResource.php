@@ -2,7 +2,8 @@
 
 namespace roaresearch\yii2\roa\controllers;
 
-use roaresearch\yii2\roa\actions\{ProfileUpdate, ProfileView};
+use roaresearch\yii2\roa\actions\{FileStream, ProfileUpdate, ProfileView};
+use Yii;
 use yii\{base\Model, filters\VerbFilter, rest\OptionsAction};
 
 class ProfileResource extends \yii\rest\Controller
@@ -53,6 +54,13 @@ class ProfileResource extends \yii\rest\Controller
                 'scenario' => $this->updateScenario,
             ],
             'options' => ['class' => OptionsAction::class],
+            'file-stream' => [
+                'class' => FileStream::class,
+                'modelClass' => Yii::$app->identityClass,
+                'findModel' => function () {
+                    return Yii::$app->identity;
+                },
+            ],
         ];
     }
 }
