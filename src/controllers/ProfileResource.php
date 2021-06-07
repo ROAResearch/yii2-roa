@@ -56,9 +56,9 @@ class ProfileResource extends \yii\rest\Controller
             'options' => ['class' => OptionsAction::class],
             'file-stream' => [
                 'class' => FileStream::class,
-                'modelClass' => Yii::$app->identityClass,
+                'modelClass' => Yii::$app->user->identityClass,
                 'findModel' => function () {
-                    return Yii::$app->identity;
+                    return Yii::$app->user->identity;
                 },
             ],
         ];
