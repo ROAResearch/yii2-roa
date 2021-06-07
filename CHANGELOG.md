@@ -1,6 +1,11 @@
 Yii2 ROA Library
 ================
 
+2.0.3 June 5, 2021
+------------------
+
+- [Bug] Missing file stream action in `ProfileResource` (Faryshta)
+
 2.0.2 June 4, 2021
 ------------------
 
