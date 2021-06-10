@@ -14,6 +14,11 @@ Yii2 ROA Library
 - [Brk] `roaresearch\yii2\hal\ARContract` typehinted in actions.
 - [Brk] Interface and classes use typehint whenever possible.
 
+2.0.2 June 4, 2021
+------------------
+
+- [Bug] Fix issue with cached url rules (Faryshta)
+
 2.0.1 October 28, 2020
 ----------------------
 

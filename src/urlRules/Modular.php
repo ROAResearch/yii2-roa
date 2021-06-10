@@ -43,6 +43,7 @@ class Modular extends Composite
 
     /**
      * @inheritdoc
+
      */
     protected function createRules()
     {
