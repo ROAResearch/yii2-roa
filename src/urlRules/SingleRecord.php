@@ -24,7 +24,16 @@ class SingleRecord extends Resource
     ];
 
     /**
+     * @var string[] list of valid extensions that this rule can handle.
+     */
+    public $ext = ['png', 'jpg'];
+
+    /**
      * @inheritdoc
      */
-    public $tokens = [];
+    public function init()
+    {
+        $this->tokens['{ext}'] = '<ext:(' . implode('|', $this->ext) . ')>';
+        parent::init();
+    }
 }

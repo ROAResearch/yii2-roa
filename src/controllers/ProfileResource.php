@@ -18,6 +18,12 @@ class ProfileResource extends \yii\rest\Controller
     public $updateScenario = Model::SCENARIO_DEFAULT;
 
     /**
+     * @var string[] array used in `actions\Update::fileAttributes`
+     * @see actions\LoadFileTrait::$fileAttributes
+     */
+    public $updateFileAttributes = ['file'];
+
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -55,7 +61,9 @@ class ProfileResource extends \yii\rest\Controller
             'view' => ['class' => ProfileView::class],
             'update' => [
                 'class' => ProfileUpdate::class,
+                'findModel' => [$this, 'findModel'],
                 'scenario' => $this->updateScenario,
+                'fileAttributes' => $this->updateFileAttributes,
             ],
             'options' => ['class' => OptionsAction::class],
             'file-stream' => ['class' => ProfileFileStream::class],
