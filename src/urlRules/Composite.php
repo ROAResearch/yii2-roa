@@ -38,6 +38,13 @@ abstract class Composite extends \yii\web\CompositeUrlRule
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setNormalizer(UrlNormalizer | array $normalizer): void
     {
         $this->normalizer = Instance::ensure($normalizer, UrlNormalizer::class);

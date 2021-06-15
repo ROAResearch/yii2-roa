@@ -56,6 +56,14 @@ class Shop extends \app\models\Shop implements ARContract
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        return ['id', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function extraFields()
     {
         return ['employees'];
