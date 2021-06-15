@@ -61,7 +61,6 @@ class ProfileResource extends \yii\rest\Controller
             'view' => ['class' => ProfileView::class],
             'update' => [
                 'class' => ProfileUpdate::class,
-                'findModel' => [$this, 'findModel'],
                 'scenario' => $this->updateScenario,
                 'fileAttributes' => $this->updateFileAttributes,
             ],
