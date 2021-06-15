@@ -21,7 +21,7 @@ class ProfileResource extends \yii\rest\Controller
      * @var string[] array used in `actions\Update::fileAttributes`
      * @see actions\LoadFileTrait::$fileAttributes
      */
-    public $updateFileAttributes = ['file'];
+    public $updateFileAttributes = [];
 
     /**
      * @inheritdoc
