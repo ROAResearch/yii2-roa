@@ -26,7 +26,7 @@ class SingleRecord extends Resource
     /**
      * @var string[] list of valid extensions that this rule can handle.
      */
-    public $ext = ['png', 'jpg'];
+    public $ext = ['png', 'jpg', 'jpeg'];
 
     /**
      * @inheritdoc
