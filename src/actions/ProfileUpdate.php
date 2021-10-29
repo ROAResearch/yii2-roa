@@ -17,7 +17,7 @@ class ProfileUpdate extends \yii\rest\Action
     /**
      * @var string[] that defines which columns will be recibe files
      */
-    public $fileAttributes = [];
+    public array $fileAttributes = [];
 
     /**
      * @inheritdoc
