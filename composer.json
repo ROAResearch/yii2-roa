@@ -19,6 +19,14 @@
             "email": "aguevara@solmipro.com"
         }
     ],
+    "extra": {
+        "utilConfig": {
+            "dbname": "yii2_roa_test",
+            "dbtpls": {
+                "tests/_app/config/db.local.php": "roaresearch\\composer\\utils\\Yii2DBTPL"
+            }
+        }
+    },
     "repositories": [
         {
             "type": "composer",
@@ -26,41 +34,52 @@
         }
     ],
     "require": {
-        "php": "~8.0",
-        "roaresearch/yii2-oauth2-server": "~5.0",
-        "yiisoft/yii2": "~2.0.27"
+        "php": "~8.1",
+        "roaresearch/yii2-oauth2-server": "~7.0",
+        "yiisoft/yii2": "2.0.45"
     },
     "require-dev": {
         "ext-curl": "*",
-        "codeception/codeception": "~4.1",
-        "codeception/module-asserts": "~1.2",
-        "codeception/module-rest": "~1.2",
-        "codeception/module-yii2": "~1.1",
-        "codeception/verify": "~2.1",
+        "ext-curl": "*",
+        "codeception/codeception": "~5.0.0",
+        "codeception/module-asserts": "dev-master",
+        "codeception/module-rest": "*",
+        "codeception/module-yii2": "*",
+        "codeception/verify": "~2.2.0",
+        "roaresearch/composer-utils": "*",
+        "softcreatr/jsonpath": "~0.7",
         "phpunit/php-code-coverage": "~9.2",
-        "squizlabs/php_codesniffer": "~3.5.0",
         "softcreatr/jsonpath": "~0.3",
         "yiisoft/yii2-debug": "~2.1",
         "yii2tech/ar-softdelete": "~1.0.2"
     },
     "scripts": {
-        "yii": "@php tests/_app/yii.php",
-        "deploy-tests": [
-            "@composer update --prefer-stable",
-            "@composer yii -- migrate -p=@roaresearch/yii2/oauth2server/migrations/tables --interactive=0",
-            "@composer yii -- migrate -p=@app/migrations/ --interactive=0",
-            "chmod +x git-hooks/pre-commit",
-            "ln -sfr git-hooks/pre-commit .git/hooks/pre-commit"
-        ],
-        "sniff-php-file": [
-            "@php -l",
-            "vendor/bin/phpcs"
-        ],
-        "run-tests": "@php vendor/bin/codecept run --steps",
-        "run-coverage": [
-            "@putenv XDEBUG_MODE=coverage",
-            "@composer run-tests -- --coverage --coverage-xml"
-        ]
+      "deploy": [
+           "@composer install",
+           "tests\\AutoloadListener::autoload",
+           "@config-db",
+           "@deploy-db",
+           "@run-tests"
+       ],
+       "config-db": "roaresearch\\composer\\utils\\DBListener::config",
+       "blank-db": "roaresearch\\composer\\utils\\DBListener::blankConfig",
+       "migrate": "tests/_app/yii.php migrate --interactive=0",
+       "fixture": "tests/_app/yii.php fixture '*' --interactive=0",
+       "deploy-db": [
+           "@composer migrate -- -p=@roaresearch/yii2/oauth2server/migrations/tables",
+           "@composer migrate -- -p=@app/migrations",
+           "@run-fixtures"
+       ],
+       "run-fixtures": [
+           "@composer fixture -- -n=roaresearch\\\\yii2\\\\oauth2server\\\\fixtures",
+           "@composer fixture -- -n=app\\\\fixtures"
+       ],
+       "run-tests": [
+           "@php vendor/bin/codecept run --steps"
+       ],
+       "run-coverage": [
+           "@php vendor/bin/codecept run --steps api --coverage --coverage-xml --coverage-html"
+       ]
     },
     "scripts-descriptions": {
         "yii": "shortcut for `php tests/_app/yii.php`",
@@ -71,6 +90,18 @@
     "autoload": {
         "psr-4": {
             "roaresearch\\yii2\\roa\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/AutoloadListener.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp": true
         }
     }
 }

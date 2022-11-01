@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\test;
 
-use Codeception\{Example, Util\HttpCode};
+use Codeception\{Example, Util\HttpCode, Verify\Verify};
 use roaresearch\yii2\roa\urlRules\Resource as ResourceUrlRule;
 use yii\web\UrlManager;
 
@@ -242,7 +242,7 @@ abstract class AbstractResourceCest
         }
         if (isset($example['headers'])) {
             foreach ($example['headers'] as $header => $value) {
-                $I->seeHttpHeader($header, $value);
+                $I->seeHttpHeader($header, (string)$value);
             }
         }
     }
@@ -310,7 +310,6 @@ abstract class AbstractResourceCest
             ];
         }
         $I->seeResponseContainsJson($expected);
-
     }
 
     /**
@@ -341,8 +340,8 @@ abstract class AbstractResourceCest
         if ('' == $path = $this->selfLinkPath()) {
             return;
         }
-        verify($I->grabDataFromResponseByJsonPath($path))
-            ->arrayContains($expected);
+        Verify::Array($I->grabDataFromResponseByJsonPath($path))
+            ->contains($expected);
     }
 
     /**
