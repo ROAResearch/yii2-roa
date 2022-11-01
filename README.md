@@ -13,7 +13,7 @@ Scrutinizer [![Build Status Scrutinizer](https://scrutinizer-ci.com/g/roaresearc
 
 ### Prerequisites
 
-- Install PHP 7.1 or higher
+- Install PHP 8.1 or higher
 - [Composer Installed](https://getcomposer.org/doc/00-intro.md)
 - Run command `composer check-platform-reqs` to check all requirements.
 
