@@ -10,7 +10,6 @@ using the Yii2 framework.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/?branch=master)
 
 Scrutinizer [![Build Status Scrutinizer](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/badges/build.png?b=master&style=flat)](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/build-status/master)
-Travis [![Build Status Travis](https://travis-ci.org/roaresearch/yii2-roa.svg?branch=master&style=flat?style=for-the-badge)](https://travis-ci.org/roaresearch/yii2-roa)
 
 ### Prerequisites
 
