@@ -1,6 +1,11 @@
 Yii2 ROA Library
 ================
 
+4.0.0
+-----
+
+- [Brk] PHP 8.1 minimum required
+
 3.0.0
 -----
 

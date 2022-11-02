@@ -1,12 +1,14 @@
 <?php
 
-class m130101_000006_shop_sale_item extends \roaresearch\yii2\migrate\CreateTableMigration
+use roaresearch\yii2\migrate\{CreateTableMigration, ReferenceOption};
+
+class m130101_000006_shop_sale_item extends CreateTableMigration
 {
     /**
      * @inhertidoc
      */
-    public $defaultOnDelete = 'RESTRICT';
-    
+    public ReferenceOption $defaultOnDelete = ReferenceOption::Restrict;
+
     /**
      * @inhertidoc
      */
