@@ -19,7 +19,7 @@ class Employee extends \yii\db\ActiveRecord
      * @var string full class name of the model used in the relation
      * `getShop()`.
      */
-    protected $shopClass = Shop::class;
+    protected string $shopClass = Shop::class;
 
     /**
      * @inheritdoc

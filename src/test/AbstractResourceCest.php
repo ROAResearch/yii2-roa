@@ -57,7 +57,7 @@ abstract class AbstractResourceCest
         if (isset($example['url'])) {
             return $example['url'];
         }
-        $params = isset($example['urlParams']) ? $example['urlParams'] : [];
+        $params = $example['urlParams'] ?? [];
         $params[0] = 'test/action';
 
         return $this->urlManager->createUrl($params);
@@ -111,7 +111,7 @@ abstract class AbstractResourceCest
         // Send request
         $I->sendPOST(
             $this->parseUrl($example),
-            isset($example['data']) ? $example['data'] : []
+            $example['data'] ?? []
         );
 
         // Checks the response has the required headers and body.
@@ -342,7 +342,7 @@ abstract class AbstractResourceCest
             return;
         }
         verify($I->grabDataFromResponseByJsonPath($path))
-            ->contains($expected);
+            ->arrayContains($expected);
     }
 
     /**

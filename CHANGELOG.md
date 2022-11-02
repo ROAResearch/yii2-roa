@@ -1,6 +1,19 @@
 Yii2 ROA Library
 ================
 
+3.0.0
+-----
+
+- [Brk] PHP8 minimum required
+- [Brk] `roaresearch\yii2\roa\behaviors\Slug::$checkAccess` and
+  `roaresearch\yii2\roa\actions\Action::$checkAccess` eliminated in favor of
+  anonymous classes
+- [Brk] `roaresearch\yii2\behaviors\Slug::$idAttribute` eliminated in favor of
+  `::$idAttributes`
+- [Enh] `roaresearch\yii2\hal\ARContract` interface for homologated typehints
+- [Brk] `roaresearch\yii2\hal\ARContract` typehinted in actions.
+- [Brk] Interface and classes use typehint whenever possible.
+
 2.0.3 June 5, 2021
 ------------------
 

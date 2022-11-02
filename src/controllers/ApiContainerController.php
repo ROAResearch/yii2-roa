@@ -32,7 +32,7 @@ class ApiContainerController extends \yii\rest\Controller
      *
      * @return string[]
      */
-    public function actionIndex()
+    public function actionIndex(): array
     {
         return ArrayHelper::map(
             $this->module->versionModules,
@@ -45,7 +45,7 @@ class ApiContainerController extends \yii\rest\Controller
      * Handles the exceptions catched by the system bootstrapping process.
      * @return \Exception
      */
-    public function actionError()
+    public function actionError(): \Exception
     {
         if (($exception = Yii::$app->getErrorHandler()->exception) === null) {
             $exception = new NotFoundHttpException(

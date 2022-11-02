@@ -2,8 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use Yii;
-use yii\web\ServerErrorHttpException;
+use roaresearch\yii2\roa\hal\ARContract;
 
 /**
  * Deletes a record using the `softDelete()` method. Meant to be used with
@@ -11,26 +10,20 @@ use yii\web\ServerErrorHttpException;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class SoftDelete extends Action
+class SoftDelete extends ProctRecordAction
 {
+    use DeleteResponseTrait;
+
     /**
-     * Applies the `softDelete()` method to a record.
-     *
-     * @param mixed $id the identifier value.
+     * @inheritdoc
      */
-    public function run($id)
+    protected string $errorMessage = 'Soft Delete failed for unknown reasons.';
+
+    /**
+     * @inheritdoc
+     */
+    protected function proct(ARContract $model, array $params): bool
     {
-        $this->checkAccess(
-            ($model = $this->findModel($id)),
-            Yii::$app->request->queryParams
-        );
-
-        if (false === $model->softDelete()) {
-            throw new ServerErrorHttpException(
-                'Failed to delete the object for unknown reason.'
-            );
-        }
-
-        Yii::$app->getResponse()->setStatusCode(204);
+        return false !== $model->softDelete();
     }
 }

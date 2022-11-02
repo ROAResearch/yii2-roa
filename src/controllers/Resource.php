@@ -2,14 +2,12 @@
 
 namespace roaresearch\yii2\roa\controllers;
 
-use roaresearch\yii2\roa\{actions, FileRecord};
+use roaresearch\yii2\roa\{actions, FileRecord, hal\ARContract};
 use Yii;
 use yii\{
     base\InvalidRouteException,
     data\ActiveDataProvider,
     db\ActiveQuery,
-    db\ActiveRecord,
-    db\ActiveRecordInterface,
     filters\VerbFilter,
     helpers\ArrayHelper,
     web\MethodNotAllowedHttpException,
@@ -26,7 +24,7 @@ class Resource extends \yii\rest\ActiveController
     /**
      * @var string[] list of rest actions defined by default.
      */
-    const DEFAULT_REST_ACTIONS = [
+    public const DEFAULT_REST_ACTIONS = [
         'index',
         'view',
         'create',
@@ -39,58 +37,48 @@ class Resource extends \yii\rest\ActiveController
     /**
      * @var string name of the attribute to be used on `findModel()`.
      */
-    public $idAttribute = 'id';
+    public string $idAttribute = 'id';
 
     /**
-     * @var string attribute name used to filter only the records associated to
+     * @var ?string attribute name used to filter only the records associated to
      * the logged user.
      * If `null` then no filter will be added.
      */
-    public $userAttribute;
+    public ?string $userAttribute;
 
     /**
-     * @var string class name for the model to be used on the search.
-     * Must implement `roaresearch\yii2\roa\ResourceSearchInterface`
+     * @var ?string class name for the model to be used on the search.
+     * Must implement `roaresearch\yii2\roa\ResourceSearch`
      */
-    public $searchClass;
+    public ?string $searchClass = null;
 
     /**
      * @var string name of the form which will hold the GET parameters to filter
      * results on a search request.
      */
-    public $searchFormName = '';
+    public string $searchFormName = '';
 
     /**
      * @var string[] $attribute => $param pairs to filter the queries.
      */
-    public $filterParams = [];
-
-    /**
-     * @var string scenario to be used when updating a record.
-     */
-    public $updateScenario = ActiveRecord::SCENARIO_DEFAULT;
-
-    /**
-     * @var string scenario to be used when creating a new record.
-     */
-    public $createScenario = ActiveRecord::SCENARIO_DEFAULT;
+    public array $filterParams = [];
 
     /**
      * @var string[] array used in `actions\Create::fileAttributes`
      * @see actions\LoadFileTrait::$fileAttributes
      */
-    public $createFileAttributes = [];
+    public array $createFileAttributes = [];
 
     /**
      * @var string[] array used in `actions\Update::fileAttributes`
      * @see actions\LoadFileTrait::$fileAttributes
      */
-    public $updateFileAttributes = [];
+    public array $updateFileAttributes = [];
 
     /**
      * @var string the message shown when no register is found.
      */
-    public $notFoundMessage = 'The record "{id}" does not exists.';
+    public string $notFoundMessage = 'The record "{id}" does not exists.';
 
     /**
      * @inheritdoc
@@ -177,18 +165,14 @@ class Resource extends \yii\rest\ActiveController
     /**
      * Finds the record based on the provided id or throws an exception.
      * @param int $id the unique identifier for the record.
-     * @return ActiveRecordInterface
+     * @return ARContract
      * @throws NotFoundHttpException if the record can't be found.
      */
-    public function findModel($id): ActiveRecordInterface
+    public function findModel($id): ARContract
     {
-        if (null === ($model = $this->findQuery($id)->one())) {
-            throw new NotFoundHttpException(
-                strtr($this->notFoundMessage, ['{id}' => $id])
-            );
-        }
-
-        return $model;
+        return $this->findQuery($id)->one() ?: throw new NotFoundHttpException(
+            strtr($this->notFoundMessage, ['{id}' => $id])
+        );
     }
 
     /**
@@ -218,9 +202,7 @@ class Resource extends \yii\rest\ActiveController
      */
     protected function baseQuery(): ActiveQuery
     {
-        $modelClass = $this->modelClass;
-
-        return $modelClass::find()
+        return $this->modelClass::find()
             ->andFilterWhere($this->filterCondition());
     }
 
