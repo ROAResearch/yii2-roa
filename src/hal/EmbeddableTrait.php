@@ -15,7 +15,9 @@ use yii\web\Linkable;
  */
 trait EmbeddableTrait
 {
-    use ArrayableTrait;
+    use ArrayableTrait {
+        extractFieldsFor as baseExtractFieldsFor;
+    }
 
     /**
      * @inheritdoc
@@ -74,7 +76,7 @@ trait EmbeddableTrait
             }
         }
 
-        if ($this instanceof Linkable) {
+        if ($this instanceof Linkable && !in_array('!_links', $fields)) {
             $data['_links'] = Link::serialize($this->getLinks());
         }
 
@@ -87,6 +89,26 @@ trait EmbeddableTrait
     public function getExpandEnvelope(): string
     {
         return Embeddable::EMBEDDED_PROPERTY;
+    }
+    
+    
+    /**
+     * Extract nested fields from a fields collection for a given root field
+     * Nested fields are separated with dots (.). e.g: "item.id"
+     * The previous example would extract "id".
+     *
+     * Since 4.0.1 the field "!_links" is supported and handled specialy in
+     * the sense that if its present on root it will be inherited to any
+     * nested item.
+     *
+     * @param array $fields The fields requested for extraction
+     * @param string $rootField The root field for which we want to extract the nested fields
+     * @return array nested fields extracted for the given field
+     */
+    protected function extractFieldsFor(array $fields, $rootField)
+    {
+        return $this->baseExtractFieldsFor($fields, $rootField)
+            + (in_array('!_links', $fields) ? ['!_links'] : []);
     }
 
     /**
@@ -106,13 +128,13 @@ trait EmbeddableTrait
         $result = [];
 
         foreach ($this->fields() as $field => $definition) {
-                if (is_int($field)) {
-                    $field = $definition;
-                }
+            if (is_int($field)) {
+                $field = $definition;
+            }
 
-                if (empty($fields) || in_array($field, $fields, true)) {
-                    $result[$field] = $definition;
-                }
+            if (empty($fields) || in_array($field, $fields, true)) {
+                $result[$field] = $definition;
+            }
         }
 
         return $result;
