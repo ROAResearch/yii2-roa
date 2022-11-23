@@ -8,7 +8,7 @@ use yii\{base\InvalidConfigException, web\NotFoundHttpException};
 /**
  * Url Rule to handle modules implementing the `UrlRuleCreator` interface.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Modular extends Composite
 {

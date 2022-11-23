@@ -7,7 +7,7 @@ use yii\web\Linkable;
 /**
  * Interface which adds all the needed support for a HAL contract.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 interface Contract extends Embeddable, Linkable
 {

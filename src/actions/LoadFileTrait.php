@@ -6,7 +6,7 @@ use yii\{base\Model, web\UploadedFile};
 
 /**
  * Trait to configure and load uploaded files to a model.
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 trait LoadFileTrait
 {

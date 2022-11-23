@@ -9,7 +9,7 @@ use yii\web\ServerErrorHttpException;
  * Restores a record using the `restoreDelete()` method. Meant to be used with
  * library "yii2tech/ar-softdelete".
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Restore extends Action
 {

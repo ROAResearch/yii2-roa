@@ -8,7 +8,7 @@ use yii\web\ServerErrorHttpException;
 /**
  * Deletes a record from the database.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Delete extends Action
 {

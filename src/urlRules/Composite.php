@@ -13,7 +13,7 @@ use yii\{
 /**
  * Url rule that can call children rule when applicable.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 abstract class Composite extends \yii\web\CompositeUrlRule
 {

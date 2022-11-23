@@ -5,7 +5,7 @@ namespace roaresearch\yii2\roa\test;
 /**
  * Interface to test ROA resources services.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 interface Tester
 {

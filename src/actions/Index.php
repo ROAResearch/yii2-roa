@@ -8,7 +8,7 @@ use yii\{base\InvalidConfigException, data\ActiveDataProvider};
 /**
  * Action to retreive a filtered and sorted collection based on a `$searchClass`
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Index extends Action
 {

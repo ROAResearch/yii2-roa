@@ -12,7 +12,7 @@ use yii\{
 /**
  * Behavior to handle slug componentes linked as parent-child relations.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  * @author Luis (Berkant) Campos <lcampos@artificesweb.com>
  * @author Alejandro (Seether69) Márquez <amarquez@solmipro.com>
  */

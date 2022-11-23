@@ -8,7 +8,7 @@ namespace roaresearch\yii2\roa\urlRules;
  *
  * That means the resource doesn't contain collections.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class SingleRecord extends Resource
 {

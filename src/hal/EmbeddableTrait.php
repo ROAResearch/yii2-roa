@@ -9,7 +9,7 @@ use yii\{base\Arrayable, web\Link, web\Linkable};
 /**
  * Interface to get a the information of a file associated to a model.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 trait EmbeddableTrait
 {
