@@ -10,11 +10,10 @@ using the Yii2 framework.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/?branch=master)
 
 Scrutinizer [![Build Status Scrutinizer](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/badges/build.png?b=master&style=flat)](https://scrutinizer-ci.com/g/roaresearch/yii2-roa/build-status/master)
-Travis [![Build Status Travis](https://travis-ci.org/roaresearch/yii2-roa.svg?branch=master&style=flat?style=for-the-badge)](https://travis-ci.org/roaresearch/yii2-roa)
 
 ### Prerequisites
 
-- Install PHP 7.1 or higher
+- Install PHP 8.1 or higher
 - [Composer Installed](https://getcomposer.org/doc/00-intro.md)
 - Run command `composer check-platform-reqs` to check all requirements.
 

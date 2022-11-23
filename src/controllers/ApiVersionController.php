@@ -24,7 +24,7 @@ class ApiVersionController extends \yii\rest\Controller
      *
      * @return array
      */
-    public function actionIndex()
+    public function actionIndex(): array
     {
         return $this->module->getFactSheet();
     }

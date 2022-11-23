@@ -2,6 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
+use roaresearch\yii2\roa\hal\ARContract;
 use Yii;
 use yii\{base\Model, web\ServerErrorHttpException};
 
@@ -16,19 +17,18 @@ class Create extends Action
     /**
      * @var string the scenario to be assigned to the new model before it is validated and saved.
      */
-    public $scenario = Model::SCENARIO_DEFAULT;
+    public string $scenario = Model::SCENARIO_DEFAULT;
 
     /**
      * Creates a new model.
-     * @return \yii\db\ActiveRecordInterface the model newly created
+     * @return ARContract the model newly created
      * @throws ServerErrorHttpException if there is any error when creating the model
      */
-    public function run()
+    public function run(): ARContract
     {
         $request = Yii::$app->getRequest();
-        $modelClass = $this->modelClass;
-        /* @var $model \yii\db\ActiveRecordInterface */
-        $model = new $modelClass([
+        /* @var $model ARContract */
+        $model = new ($this->modelClass)([
             'scenario' => $this->scenario,
         ]);
         $model->load(

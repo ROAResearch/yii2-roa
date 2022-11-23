@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\test;
 
-use Codeception\{Example, Util\HttpCode};
+use Codeception\{Example, Util\HttpCode, Verify\Verify};
 use roaresearch\yii2\roa\urlRules\Resource as ResourceUrlRule;
 use yii\web\UrlManager;
 
@@ -57,7 +57,7 @@ abstract class AbstractResourceCest
         if (isset($example['url'])) {
             return $example['url'];
         }
-        $params = isset($example['urlParams']) ? $example['urlParams'] : [];
+        $params = $example['urlParams'] ?? [];
         $params[0] = 'test/action';
 
         return $this->urlManager->createUrl($params);
@@ -111,7 +111,7 @@ abstract class AbstractResourceCest
         // Send request
         $I->sendPOST(
             $this->parseUrl($example),
-            isset($example['data']) ? $example['data'] : []
+            $example['data'] ?? []
         );
 
         // Checks the response has the required headers and body.
@@ -242,7 +242,7 @@ abstract class AbstractResourceCest
         }
         if (isset($example['headers'])) {
             foreach ($example['headers'] as $header => $value) {
-                $I->seeHttpHeader($header, $value);
+                $I->seeHttpHeader($header, (string)$value);
             }
         }
     }
@@ -310,7 +310,6 @@ abstract class AbstractResourceCest
             ];
         }
         $I->seeResponseContainsJson($expected);
-
     }
 
     /**
@@ -341,7 +340,7 @@ abstract class AbstractResourceCest
         if ('' == $path = $this->selfLinkPath()) {
             return;
         }
-        verify($I->grabDataFromResponseByJsonPath($path))
+        Verify::Array($I->grabDataFromResponseByJsonPath($path))
             ->contains($expected);
     }
 

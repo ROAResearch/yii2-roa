@@ -2,6 +2,7 @@
 
 namespace app\api\models;
 
+use roaresearch\yii2\roa\hal\ARContractSearch;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -9,7 +10,7 @@ use yii\data\ActiveDataProvider;
  *
  * @author Carlos (neverabe) Llamosas <carlos@invernaderolabs.com>
  */
-class ShopSearch extends Shop implements \roaresearch\yii2\roa\ResourceSearch
+class ShopSearch extends Shop implements ARContractSearch
 {
     /**
      * @inhertidoc

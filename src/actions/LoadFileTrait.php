@@ -2,7 +2,7 @@
 
 namespace roaresearch\yii2\roa\actions;
 
-use yii\{base\Model, web\UploadedFile};
+use yii\web\UploadedFile;
 
 /**
  * Trait to configure and load uploaded files to a model.
@@ -23,7 +23,7 @@ trait LoadFileTrait
      * ]
      * ```
      */
-    public $fileAttributes = [];
+    public array $fileAttributes = [];
 
     /**
      * Parse the allowed uploaded files.

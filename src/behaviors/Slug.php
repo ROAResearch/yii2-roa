@@ -2,11 +2,13 @@
 
 namespace roaresearch\yii2\roa\behaviors;
 
+use roaresearch\yii2\roa\hal\ARContract;
 use yii\{
+    base\Action,
     base\InvalidConfigException,
     db\BaseActiveRecord,
     helpers\Url,
-    web\NotFoundHttpException
+    web\NotFoundHttpException,
 };
 
 /**
@@ -19,83 +21,65 @@ use yii\{
 class Slug extends \yii\base\Behavior
 {
     /**
-     * @var callable a PHP callable which will determine if the logged
-     * user has permission to access a resource record or any of its
-     * chidren resources.
-     *
-     * It must have signature
-     * ```php
-     * function (array $queryParams): void
-     *     throws \yii\web\HTTPException
-     * {
-     * }
-     * ```
+     * @var ?string name of the parent relation of the `$owner`
      */
-    public $checkAccess;
-
-    /**
-     * @var string name of the parent relation of the `$owner`
-     */
-    public $parentSlugRelation;
+    public ?string $parentSlugRelation = null;
 
     /**
      * @var string name of the resource
      */
-    public $resourceName;
+    public string $resourceName;
 
     /**
-     * @var string|array name of the identifier attribute
+     * @var array name of the identifier attribute
      */
-    public $idAttribute = 'id';
+    public array $idAttributes = ['id'];
 
     /**
      * @var string separator to create the route for resources with multiple id
      * attributes.
      */
-    public $idAttributeSeparator = '/';
+    public string $idAttributeSeparator = '/';
 
     /**
      * @var string parentNotFoundMessage for not found exception when the parent
      * slug was not found
      */
-    public $parentNotFoundMessage = '"{resourceName}" not found';
+    public string $parentNotFoundMessage = '"{resourceName}" not found';
 
     /**
-     * @var ?BaseActiveRecord parent record.
+     * @var ?ARContract parent record.
      */
-    protected $parentSlug;
+    protected ?ARContract $parentSlug = null;
 
     /**
      * @var string url to resource
      */
-    protected $resourceLink;
+    protected string $resourceLink;
 
     /**
      * @inheritdoc
      */
     public function init()
     {
-        if (empty($this->resourceName)) {
-            throw new InvalidConfigException(
-                self::class . '::$resourceName must be defined.'
-            );
-        }
-
-        $this->idAttribute = (array)$this->idAttribute;
+        $this->resourceName ?: throw new InvalidConfigException(
+            $this::class . '::$resourceName must be defined.'
+        );
     }
 
     /**
      * Ensures the parent record is attached to the behavior.
      *
-     * @param BaseActiveRecord $owner
+     * @param ARContract $owner
      * @param bool $force whether to force finding the slug parent record
      * when `$parentSlugRelation` is defined
      */
-    private function ensureSlug(BaseActiveRecord $owner, bool $force = false)
+    private function ensureSlug(ARContract $owner, bool $force = false)
     {
         if (null === $this->parentSlugRelation) {
-            $this->resourceLink = Url::to([$this->resourceName . '/'], true);
-        } elseif ($force
+            $this->resourceLink = $this->defaultResourceLink();
+        } elseif (
+            $force
             || $owner->isRelationPopulated($this->parentSlugRelation)
         ) {
             $this->populateSlugParent($owner);
@@ -103,24 +87,26 @@ class Slug extends \yii\base\Behavior
     }
 
     /**
+     * @return string default resource link used at bottom level resources.
+     */
+    protected function defaultResourceLink(): string
+    {
+        return Url::to([$this->resourceName . '/'], true);
+    }
+
+    /**
      * This populates the slug to the parentSlug
      * @param BaseActiveRecord $owner
      */
-    private function populateSlugParent(BaseActiveRecord $owner)
+    private function populateSlugParent(ARContract $owner)
     {
-        $relation = $this->parentSlugRelation;
-        $this->parentSlug = $owner->$relation;
-
-        if (null === $this->parentSlug) {
-            throw new NotFoundHttpException(
+        $this->parentSlug = $owner->{$this->parentSlugRelation}
+            ?: throw new NotFoundHttpException(
                 strtr(
                     $this->parentNotFoundMessage,
-                    [
-                        '{resourceName}' => $this->parentSlugRelation,
-                    ]
+                    ['{resourceName}' => $this->parentSlugRelation]
                 )
             );
-        }
 
         $this->resourceLink = $this->parentSlug->getSelfLink()
             . '/' . $this->resourceName;
@@ -132,7 +118,7 @@ class Slug extends \yii\base\Behavior
     public function getResourceRecordId(): string
     {
         $attributeValues = [];
-        foreach ($this->idAttribute as $attribute) {
+        foreach ($this->idAttributes as $attribute) {
             $attributeValues[] = $this->owner->$attribute;
         }
 
@@ -172,9 +158,11 @@ class Slug extends \yii\base\Behavior
             'self' => $this->getSelfLink(),
             $this->resourceName . '_collection' => $this->resourceLink,
         ];
+
         if (null === $this->parentSlug) {
             return $selfLinks;
         }
+
         $parentLinks = $this->parentSlug->getSlugLinks();
         $parentLinks[$this->parentSlugRelation . '_record']
             = $parentLinks['self'];
@@ -187,17 +175,21 @@ class Slug extends \yii\base\Behavior
     /**
      * Determines if the logged user has permission to access a resource
      * record or any of its chidren resources.
-     * @param  Array $params
+     *
+     * When extending this method make sure to call the parent at the end.
+     *
+     * ```php
+     * // custom logic
+     * parent::checkAccess($params, $action);
+     * ```
+     *
+     * @param  array $params
+     * @param ?Action $action
+     * @throws \yii\web\HttpException
      */
-    public function checkAccess(array $params)
+    public function checkAccess(array $params, ?Action $action = null): void
     {
         $this->ensureSlug($this->owner, true);
-
-        if (null !== $this->checkAccess) {
-            call_user_func($this->checkAccess, $params);
-        }
-        if (null !== $this->parentSlug) {
-            $this->parentSlug->checkAccess($params);
-        }
+        $this->parentSlug?->checkAccess($params, $action);
     }
 }
