@@ -36,13 +36,13 @@ trait EmbeddableTrait
             $this->extraFields(),
             $expand,
             $recursive
-                ? $processField
-                : fn ($field, $definition) => $this->processRecursiveField(
+                ? fn ($field, $definition) => $this->processRecursiveField(
                     $field,
                     $definition,
                     $fields,
                     $expand,
                 )
+                : $processField
         );
 
         if (($envelope = $this->getExpandEnvelope()) && !empty($expanded)) {
