@@ -8,7 +8,7 @@ use yii\{base\Model, web\ServerErrorHttpException};
 
 /**
  * Action to update the attributes in a record.
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Update extends ProctRecordAction
 {

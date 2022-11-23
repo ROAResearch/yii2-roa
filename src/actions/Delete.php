@@ -7,7 +7,7 @@ use roaresearch\yii2\roa\hal\ARContract;
 /**
  * Deletes a record from the database.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Delete extends ProctRecordAction
 {

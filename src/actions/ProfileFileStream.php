@@ -10,7 +10,7 @@ use yii\base\InvalidConfigException;
 /**
  * Access and show s the content of a file on the browser or download it.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class ProfileFileStream extends \yii\rest\Action
 {

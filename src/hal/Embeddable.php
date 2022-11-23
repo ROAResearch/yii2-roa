@@ -5,7 +5,7 @@ namespace roaresearch\yii2\roa\hal;
 /**
  * Interface to get a the information of a file associated to a model.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 interface Embeddable extends \yii\base\Arrayable
 {

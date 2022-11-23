@@ -9,7 +9,7 @@ use Yii;
  *
  * Supports representative URL using ownership slug.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Resource extends \yii\rest\UrlRule
 {

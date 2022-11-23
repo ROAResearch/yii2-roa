@@ -7,7 +7,7 @@ use yii\{helpers\Url, web\Link};
 /**
  * Behavior to autogenerate curies links.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class Curies extends \yii\base\Behavior
 {

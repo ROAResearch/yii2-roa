@@ -1,6 +1,21 @@
 Yii2 ROA Library
 ================
 
+4.1.0 November 23, 2022
+------------------
+
+- [Enh] Support for unallowed fields such as !_links (Faryshta)
+
+4.0.0 November 1, 2022
+------------------
+
+- [Brk] PHP 8.1 minimum required (Faryshta)
+
+3.0.0 October 28, 2022
+------------------
+
+- 3.0.0 (Faryshta)
+=======
 4.0.0
 -----
 

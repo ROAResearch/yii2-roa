@@ -8,7 +8,7 @@ use roaresearch\yii2\roa\hal\ARContract;
  * Deletes a record using the `softDelete()` method. Meant to be used with
  * library "yii2tech/ar-softdelete".
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class SoftDelete extends ProctRecordAction
 {

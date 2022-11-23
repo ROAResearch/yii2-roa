@@ -6,7 +6,7 @@ namespace roaresearch\yii2\roa\urlRules;
  * Rule for routing response streams to access a file for download or view it
  * on browser.
  *
- * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ * @author Angel (Faryshta) Guevara <angeldelcaos@gmail.com>
  */
 class File extends Resource
 {
