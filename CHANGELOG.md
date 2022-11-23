@@ -11,18 +11,9 @@ Yii2 ROA Library
 
 - [Brk] PHP 8.1 minimum required (Faryshta)
 
-3.0.0 October 28, 2022
+
+3.0.0 October 28, 2021
 ------------------
-
-- 3.0.0 (Faryshta)
-=======
-4.0.0
------
-
-- [Brk] PHP 8.1 minimum required
-
-3.0.0
------
 
 - [Brk] PHP8 minimum required
 - [Brk] `roaresearch\yii2\roa\behaviors\Slug::$checkAccess` and
