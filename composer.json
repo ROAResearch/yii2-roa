@@ -42,7 +42,6 @@
     },
     "require-dev": {
         "ext-curl": "*",
-        "ext-curl": "*",
         "codeception/codeception": "~5.0.0",
         "codeception/module-asserts": "dev-master",
         "codeception/module-rest": "*",
